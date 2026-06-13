@@ -1,7 +1,9 @@
 {
-    "ignore": [
-        "data/**",
-        "assets/**",
-        "assets/crew_leaderboards/**"
-    ]
+  "watch": ["."],
+  "ignore": [
+    "node_modules/**",
+    "data/**",
+    "assets/**",
+    "assets/crew_leaderboards/**"
+  ]
 }
