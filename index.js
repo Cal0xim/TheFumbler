@@ -1,4 +1,5 @@
 require('dotenv').config();
+require("./bootstrap");
 
 const {
     Client,
