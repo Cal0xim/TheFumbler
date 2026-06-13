@@ -132,6 +132,8 @@ click_y = SEARCH_REGION[1] + max_loc[1] + h // 2
 
 print(f"Found Search.png at ({click_x}, {click_y})")
 
+print("Mouse before move:", pyautogui.position())
+
 # Smooth move
 start_x, start_y = pyautogui.position()
 
