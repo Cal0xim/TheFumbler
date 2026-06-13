@@ -302,4 +302,3 @@ try:
 except Exception as e:
     print("Failed to delete screenshot:", e)
 
-print("\nDone.")
