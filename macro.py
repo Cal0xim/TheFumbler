@@ -24,7 +24,7 @@ SAVE_FOLDER = "assets/crew_leaderboards"
 JSON_FILE = os.path.join(DATA_DIR, "ratings.json")
 
 # Leaderboard screenshot area
-SCREEN_REGION = (836, 567, 779, 442)
+SCREEN_REGION = (925, 600, 592, 348)
 
 os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(SAVE_FOLDER, exist_ok=True)
@@ -206,10 +206,3 @@ save_snapshot(crews)
 # DELETE SCREENSHOT
 # ----------------------------
 
-try:
-    os.remove(filepath)
-    print("Screenshot deleted:", filepath)
-except Exception as e:
-    print("Failed to delete screenshot:", e)
-
-print("\nDone.")
