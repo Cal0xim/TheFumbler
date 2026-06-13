@@ -295,3 +295,13 @@ save_snapshot(crews)
 # ----------------------------
 # DELETE SCREENSHOT
 # ----------------------------
+
+try:
+    os.remove(filepath)
+    print("Screenshot deleted:", filepath)
+except Exception as e:
+    print("Failed to delete screenshot:", e)
+
+print("\nDone.")
+
+# webhook test
