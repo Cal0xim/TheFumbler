@@ -132,8 +132,6 @@ click_y = SEARCH_REGION[1] + max_loc[1] + h // 2
 
 print(f"Found Search.png at ({click_x}, {click_y})")
 
-print("Mouse before move:", pyautogui.position())
-
 # Smooth move
 start_x, start_y = pyautogui.position()
 
@@ -146,6 +144,12 @@ for i in range(steps + 1):
     y = start_y + (click_y - start_y) * t
 
     pyautogui.moveTo(x, y)
+
+    print(
+        f"Step {i}/{steps}: "
+        f"{pyautogui.position()}"
+    )
+
     time.sleep(0.01)
 
 # Pause
