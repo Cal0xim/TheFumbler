@@ -204,3 +204,6 @@ module.exports = async (client, config) => {
 
     console.log('Leaderboard system loaded.');
 };
+
+
+// help
