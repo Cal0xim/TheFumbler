@@ -26,12 +26,6 @@ JSON_FILE = os.path.join(DATA_DIR, "ratings.json")
 # Leaderboard screenshot area
 SCREEN_REGION = (836, 567, 779, 442)
 
-# Search.png search area
-SEARCH_REGION = (1521, 453, 184, 128)
-
-SEARCH_IMAGE = "macroImages/Search.png"
-MATCH_THRESHOLD = 0.95
-
 os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(SAVE_FOLDER, exist_ok=True)
 
@@ -74,90 +68,6 @@ def save_snapshot(crews):
 
     print("Updated OldStats -> NewStats")
 
-
-# ----------------------------
-# LOAD TEMPLATE
-# ----------------------------
-
-template = cv2.imread(
-    SEARCH_IMAGE,
-    cv2.IMREAD_GRAYSCALE
-)
-
-if template is None:
-    print(f"ERROR: {SEARCH_IMAGE} not found")
-    raise SystemExit(1)
-
-# ----------------------------
-# START
-# ----------------------------
-
-print("Starting leaderboard capture...")
-
-# Search for Search.png
-search_shot = pyautogui.screenshot(region=SEARCH_REGION)
-
-search_gray = cv2.cvtColor(
-    np.array(search_shot),
-    cv2.COLOR_RGB2GRAY
-)
-
-result = cv2.matchTemplate(
-    search_gray,
-    template,
-    cv2.TM_CCOEFF_NORMED
-)
-
-_, max_val, _, max_loc = cv2.minMaxLoc(result)
-
-print(f"Search.png match: {max_val:.3f}")
-
-if max_val < MATCH_THRESHOLD:
-    print("Leaderboard not found")
-    raise SystemExit(0)
-
-h, w = template.shape
-
-click_x = SEARCH_REGION[0] + max_loc[0] + w // 2
-click_y = SEARCH_REGION[1] + max_loc[1] + h // 2
-
-print(f"Found Search.png at ({click_x}, {click_y})")
-
-# Smooth move
-start_x, start_y = pyautogui.position()
-
-steps = 50
-
-for i in range(steps + 1):
-    t = i / steps
-
-    x = start_x + (click_x - start_x) * t
-    y = start_y + (click_y - start_y) * t
-
-    pyautogui.moveTo(x, y)
-    time.sleep(0.01)
-
-# Pause
-time.sleep(0.1)
-
-# Click
-pyautogui.mouseDown()
-time.sleep(0.05)
-pyautogui.mouseUp()
-
-print("Clicked Search.png")
-
-# Move mouse 300px to the right
-current_x, current_y = pyautogui.position()
-
-pyautogui.moveTo(
-    current_x + 300,
-    current_y,
-    duration=0.3
-)
-
-# Wait for leaderboard to open
-time.sleep(1)
 
 # ----------------------------
 # SCREENSHOT

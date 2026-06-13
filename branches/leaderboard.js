@@ -25,7 +25,7 @@ let jumpProcess = null;
 function startJumpMacro() {
     if (jumpProcess) return;
 
-    jumpProcess = spawn('python', ['jump.py'], {
+    jumpProcess = spawn('python', ['-u', 'jump.py'], {
         cwd: path.join(__dirname, '..')
     });
 
@@ -189,11 +189,15 @@ async function updateLeaderboard(client, config) {
 // -------------------- LOOP --------------------
 
 function scheduleLeaderboard(client, config) {
-    updateLeaderboard(client, config);
 
-    setInterval(() => {
+    setTimeout(() => {
         updateLeaderboard(client, config);
-    }, 60 * 60 * 1000);
+
+        setInterval(() => {
+            updateLeaderboard(client, config);
+        }, 60 * 60 * 1000);
+
+    }, 30 * 1000); // 30 seconds
 }
 
 // -------------------- EXPORT --------------------
