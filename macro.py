@@ -1,62 +1,64 @@
-import pyautogui
 import os
 import json
 import re
+import time
 from datetime import datetime
-import pytesseract
+
 import cv2
 import numpy as np
-import time
-
-from pynput.keyboard import Controller
+import pyautogui
+import pytesseract
 
 pyautogui.FAILSAFE = True
 
-keyboard = Controller()
+# ----------------------------
+# CONFIG
+# ----------------------------
 
-# ⚙️ Tesseract path
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = (
+    r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+)
 
-# 📁 Paths
 DATA_DIR = "data"
 SAVE_FOLDER = "assets/crew_leaderboards"
+JSON_FILE = os.path.join(DATA_DIR, "ratings.json")
+
+# Leaderboard screenshot area
+SCREEN_REGION = (836, 567, 779, 442)
+
+# Search.png search area
+SEARCH_REGION = (1592, 435, 190, 147)
+
+SEARCH_IMAGE = "macroImages/Search.png"
+MATCH_THRESHOLD = 0.95
 
 os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(SAVE_FOLDER, exist_ok=True)
 
-JSON_FILE = os.path.join(DATA_DIR, "ratings.json")
-
-# 📍 Leaderboard region
-SCREEN_REGION = (836, 567, 779, 442)
-
 # ----------------------------
-# LEADERBOARD CHECK
+# HELPERS
 # ----------------------------
+
 def looks_like_leaderboard(text):
-    rank_count = len(re.findall(r"#\d+", text))
-    return rank_count >= 5
+    return len(re.findall(r"#\d+", text)) >= 5
 
-# ----------------------------
-# LOAD JSON
-# ----------------------------
+
 def load_stats():
-    if os.path.exists(JSON_FILE):
-        try:
-            with open(JSON_FILE, "r", encoding="utf-8") as f:
-                content = f.read().strip()
-                if content:
-                    return json.loads(content)
-        except Exception as e:
-            print("Failed to load JSON:", e)
-
-    return {
+    default = {
         "OldStats": None,
         "NewStats": None
     }
 
-# ----------------------------
-# SAVE SNAPSHOT
-# ----------------------------
+    if not os.path.exists(JSON_FILE):
+        return default
+
+    try:
+        with open(JSON_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except:
+        return default
+
+
 def save_snapshot(crews):
     data = load_stats()
 
@@ -72,110 +74,228 @@ def save_snapshot(crews):
 
     print("Updated OldStats -> NewStats")
 
+
 # ----------------------------
-# MAIN
+# LOAD TEMPLATE
 # ----------------------------
+
+template = cv2.imread(
+    SEARCH_IMAGE,
+    cv2.IMREAD_GRAYSCALE
+)
+
+if template is None:
+    print(f"ERROR: {SEARCH_IMAGE} not found")
+    raise SystemExit(1)
+
+# ----------------------------
+# START
+# ----------------------------
+
 print("Starting leaderboard capture...")
 
-# ⌨️ SPACE using pynput (more reliable than pyautogui)
-keyboard.press(' ')
-time.sleep(0.05)
-keyboard.release(' ')
-time.sleep(0.2)
+# Search for Search.png
+search_shot = pyautogui.screenshot(region=SEARCH_REGION)
 
-# 📸 screenshot
+search_gray = cv2.cvtColor(
+    np.array(search_shot),
+    cv2.COLOR_RGB2GRAY
+)
+
+result = cv2.matchTemplate(
+    search_gray,
+    template,
+    cv2.TM_CCOEFF_NORMED
+)
+
+_, max_val, _, max_loc = cv2.minMaxLoc(result)
+
+print(f"Search.png match: {max_val:.3f}")
+
+if max_val < MATCH_THRESHOLD:
+    print("Leaderboard not found")
+    raise SystemExit(0)
+
+h, w = template.shape
+
+click_x = SEARCH_REGION[0] + max_loc[0] + w // 2
+click_y = SEARCH_REGION[1] + max_loc[1] + h // 2
+
+print(f"Found Search.png at ({click_x}, {click_y})")
+
+# Smooth move
+start_x, start_y = pyautogui.position()
+
+steps = 50
+
+for i in range(steps + 1):
+    t = i / steps
+
+    x = start_x + (click_x - start_x) * t
+    y = start_y + (click_y - start_y) * t
+
+    pyautogui.moveTo(x, y)
+    time.sleep(0.01)
+
+# Pause
+time.sleep(0.1)
+
+# Click
+pyautogui.mouseDown()
+time.sleep(0.05)
+pyautogui.mouseUp()
+
+print("Clicked Search.png")
+
+# Move mouse 300px to the right
+current_x, current_y = pyautogui.position()
+
+pyautogui.moveTo(
+    current_x + 300,
+    current_y,
+    duration=0.3
+)
+
+# Wait for leaderboard to open
+time.sleep(1)
+
+# ----------------------------
+# SCREENSHOT
+# ----------------------------
+
 screenshot = pyautogui.screenshot(region=SCREEN_REGION)
 
-filename = f"screenshot_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png"
-filepath = os.path.join(SAVE_FOLDER, filename)
+filepath = os.path.join(
+    SAVE_FOLDER,
+    f"screenshot_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png"
+)
 
 screenshot.save(filepath)
 
 print("Screenshot saved:", filepath)
 
-# 🧠 OCR
-img = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
+# ----------------------------
+# OCR
+# ----------------------------
+
+img = cv2.cvtColor(
+    np.array(screenshot),
+    cv2.COLOR_RGB2BGR
+)
+
 text = pytesseract.image_to_string(img)
 
 print("\nRAW OCR:\n")
 print(text)
 
-# ❌ not valid leaderboard
 if not looks_like_leaderboard(text):
     print("\nLeaderboard not found")
 
     try:
         os.remove(filepath)
-        print("Screenshot deleted:", filepath)
     except:
         pass
 
-    raise SystemExit
+    raise SystemExit(0)
 
 print("\nLeaderboard found")
 
 # ----------------------------
 # PARSE OCR
 # ----------------------------
-lines = [line.strip() for line in text.split("\n") if line.strip()]
 
-names = []
-ratings = []
-members = []
+lines = [
+    line.strip()
+    for line in text.split("\n")
+    if line.strip()
+]
 
+names, ratings, members = [], [], []
 mode = "names"
 
 for line in lines:
 
-    if "—" in line and "#" in line:
-        mode = "ratings"
+    # Members first
+    if "/" in line:
 
-    elif "/" in line:
         mode = "members"
 
-    if mode == "names":
-        if not line.startswith("#"):
-            names.append(line)
+        match = re.search(r"(\d+/\d+)", line)
 
-    elif mode == "ratings":
-        match = re.search(r"#\d+\s*—\s*([\d,]+)", line)
+        if match:
+            members.append(match.group(1))
+
+        continue
+
+    # Ratings second
+    if line.startswith("#"):
+
+        mode = "ratings"
+
+        match = re.search(
+            r"#\d+\D+([\d,]+)",
+            line
+        )
+
         if match:
             ratings.append(match.group(1))
 
-    elif mode == "members":
-        match = re.search(r"(\d+/\d+)", line)
-        if match:
-            members.append(match.group(1))
+        continue
+
+    # Names
+    if mode == "names":
+        names.append(line)
 
 # ----------------------------
 # BUILD DATA
 # ----------------------------
-crews = []
 
-count = min(len(names), len(ratings), len(members))
+print("\nDEBUG")
+print("Names:", len(names))
+print("Ratings:", len(ratings))
+print("Members:", len(members))
 
-for i in range(count):
-    crews.append({
+count = min(
+    len(names),
+    len(ratings),
+    len(members)
+)
+
+crews = [
+    {
         "name": names[i],
         "rating": ratings[i],
         "members": members[i]
-    })
+    }
+    for i in range(count)
+]
 
 # ----------------------------
 # OUTPUT
 # ----------------------------
+
 print("\nName | Rating | Members")
 print("-----------------------------------")
 
-for c in crews:
-    print(f"{c['name']} | {c['rating']} | {c['members']}")
+for crew in crews:
+    print(
+        f"{crew['name']} | "
+        f"{crew['rating']} | "
+        f"{crew['members']}"
+    )
 
 print("-----------------------------------")
 
-# 💾 SAVE JSON
+# ----------------------------
+# SAVE JSON
+# ----------------------------
+
 save_snapshot(crews)
 
-# 🗑️ DELETE IMAGE
+# ----------------------------
+# DELETE SCREENSHOT
+# ----------------------------
+
 try:
     os.remove(filepath)
     print("Screenshot deleted:", filepath)
