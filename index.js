@@ -81,3 +81,4 @@ client.once(Events.ClientReady, async (bot) => {
 // -------------------- LOGIN --------------------
 
 client.login(process.env.DISCORD_TOKEN);
+// No way LOL
