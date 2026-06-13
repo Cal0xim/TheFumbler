@@ -24,10 +24,10 @@ SAVE_FOLDER = "assets/crew_leaderboards"
 JSON_FILE = os.path.join(DATA_DIR, "ratings.json")
 
 # Leaderboard screenshot area
-SCREEN_REGION = (836, 567, 779, 442)
+SCREEN_REGION = (924, 595, 594, 357)
 
 # Search.png search area
-SEARCH_REGION = (1592, 435, 190, 147)
+SEARCH_REGION = (1506, 443, 218, 149)
 
 SEARCH_IMAGE = "macroImages/Search.png"
 MATCH_THRESHOLD = 0.95
