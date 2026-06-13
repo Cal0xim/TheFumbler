@@ -97,15 +97,6 @@ print("Starting leaderboard capture...")
 # Search for Search.png
 search_shot = pyautogui.screenshot(region=SEARCH_REGION)
 
-search_debug_path = os.path.join(
-    SAVE_FOLDER,
-    "search_debug.png"
-)
-
-search_shot.save(search_debug_path)
-
-print("Saved search area:", search_debug_path)
-
 search_gray = cv2.cvtColor(
     np.array(search_shot),
     cv2.COLOR_RGB2GRAY
@@ -144,12 +135,6 @@ for i in range(steps + 1):
     y = start_y + (click_y - start_y) * t
 
     pyautogui.moveTo(x, y)
-
-    print(
-        f"Step {i}/{steps}: "
-        f"{pyautogui.position()}"
-    )
-
     time.sleep(0.01)
 
 # Pause
