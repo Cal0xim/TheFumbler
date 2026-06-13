@@ -27,7 +27,7 @@ os.makedirs(SAVE_FOLDER, exist_ok=True)
 JSON_FILE = os.path.join(DATA_DIR, "ratings.json")
 
 # 📍 Leaderboard region
-SCREEN_REGION = (925, 600, 600, 355)
+SCREEN_REGION = (836, 567, 779, 442)
 
 # ----------------------------
 # LEADERBOARD CHECK

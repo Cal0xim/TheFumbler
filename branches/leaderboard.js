@@ -18,6 +18,38 @@ const IMAGE_FILE = path.join(__dirname, '..', 'assets', 'Crews.png');
 
 const HIGHLIGHT_CREW = "Frostwhale Fumblers";
 
+// -------------------- JUMP MACRO --------------------
+
+let jumpProcess = null;
+
+function startJumpMacro() {
+
+    if (jumpProcess) return;
+
+    jumpProcess = spawn('python', ['jump.py'], {
+        cwd: path.join(__dirname, '..')
+    });
+
+    jumpProcess.stdout.on('data', data => {
+        console.log('[JUMP]', data.toString().trim());
+    });
+
+    jumpProcess.stderr.on('data', data => {
+        console.error('[JUMP ERROR]', data.toString().trim());
+    });
+
+    jumpProcess.on('close', code => {
+        console.log(`jump.py exited with code ${code}`);
+        jumpProcess = null;
+    });
+
+    jumpProcess.on('error', err => {
+        console.error('Failed to start jump.py:', err);
+    });
+
+    console.log('Started jump.py');
+}
+
 // -------------------- MACRO --------------------
 
 function runMacro() {
@@ -45,7 +77,11 @@ function loadLeaderboard() {
     try {
         const raw = fs.readFileSync(DATA_FILE, 'utf8');
         const json = JSON.parse(raw);
-        return json.NewStats?.crews || json.OldStats?.crews || [];
+
+        return json.NewStats?.crews ||
+               json.OldStats?.crews ||
+               [];
+
     } catch {
         return [];
     }
@@ -69,7 +105,8 @@ async function sendLeaderboard(channel) {
         const rating = c.rating.padEnd(10);
         const members = c.members;
 
-        const line = `${rank}${name} | ${rating} | ${members}`;
+        const line =
+            `${rank}${name} | ${rating} | ${members}`;
 
         text += (c.name === HIGHLIGHT_CREW)
             ? `+ ${line}\n`
@@ -79,7 +116,7 @@ async function sendLeaderboard(channel) {
     const container = new ContainerBuilder()
         .setAccentColor(0x00AEFF)
 
-        // 🖼️ MEDIA INSIDE SAME CONTAINER
+        // 🖼️ IMAGE
         .addMediaGalleryComponents(
             new MediaGalleryBuilder().addItems(
                 new MediaGalleryItemBuilder()
@@ -87,7 +124,7 @@ async function sendLeaderboard(channel) {
             )
         )
 
-        // TABLE
+        // 📊 TABLE
         .addTextDisplayComponents(
             new TextDisplayBuilder()
                 .setContent(
@@ -113,6 +150,7 @@ ${text}
 async function updateLeaderboard(client, config) {
 
     try {
+
         console.log('Updating leaderboard...');
 
         await runMacro();
@@ -124,8 +162,13 @@ async function updateLeaderboard(client, config) {
         await sendLeaderboard(channel);
 
         console.log('Leaderboard updated.');
+
     } catch (err) {
-        console.error('Leaderboard update failed:', err);
+
+        console.error(
+            'Leaderboard update failed:',
+            err
+        );
     }
 }
 
@@ -144,6 +187,10 @@ function scheduleLeaderboard(client, config) {
 
 module.exports = async (client, config) => {
 
+    // Start jump macro once
+    startJumpMacro();
+
+    // Start leaderboard system
     scheduleLeaderboard(client, config);
 
     console.log('Leaderboard system loaded.');
