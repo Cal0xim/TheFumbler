@@ -1,5 +1,6 @@
 {
   "watch": ["."],
+  "ext": "js,mjs,cjs,json,py",
   "ignore": [
     "node_modules/**",
     "data/**",
