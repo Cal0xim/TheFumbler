@@ -303,5 +303,3 @@ except Exception as e:
     print("Failed to delete screenshot:", e)
 
 print("\nDone.")
-
-# webhook If this works im happy
