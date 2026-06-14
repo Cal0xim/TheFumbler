@@ -197,4 +197,4 @@ while running:
 
     time.sleep(1)
 
-    #next vers
+    #next version
