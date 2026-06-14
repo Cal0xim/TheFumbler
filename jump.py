@@ -141,11 +141,28 @@ while running:
 
             time.sleep(0.1)
 
-            pyautogui.mouseDown()
-            time.sleep(0.05)
-            pyautogui.mouseUp()
+            # Wiggle mouse left/right
+            for _ in range(3):
+                pyautogui.moveRel(-10, 0, duration=0.05)
+                pyautogui.moveRel(10, 0, duration=0.05)
 
-            print("Clicked Search.png")
+            # Return to center
+            pyautogui.moveTo(click_x, click_y)
+
+            # Click 5 times while moving slightly
+            for i in range(5):
+
+                pyautogui.mouseDown()
+                time.sleep(0.05)
+                pyautogui.mouseUp()
+
+                print(f"Click {i + 1}")
+
+                pyautogui.moveRel(10, 0, duration=0.05)
+
+                time.sleep(0.05)
+
+            print("Finished click sequence")
 
             # ----------------------------
             # MOVE MOUSE AWAY
