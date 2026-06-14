@@ -53,15 +53,47 @@ client.once(Events.ClientReady, async (bot) => {
 
     try {
 
-        await require('./branches/season')(
-            client,
-            CONFIG
-        );
+        // --------------------
+        // SEASON SYSTEM
+        // --------------------
 
-        await require('./branches/leaderboard')(
-            client,
-            CONFIG
-        );
+        if (
+            CONFIG.seasonChannelId &&
+            CONFIG.seasonChannelId !== '0'
+        ) {
+
+            await require('./branches/season')(
+                client,
+                CONFIG
+            );
+
+        } else {
+
+            console.log(
+                'Season system disabled.'
+            );
+        }
+
+        // --------------------
+        // LEADERBOARD SYSTEM
+        // --------------------
+
+        if (
+            CONFIG.leaderboardChannelId &&
+            CONFIG.leaderboardChannelId !== '0'
+        ) {
+
+            await require('./branches/leaderboard')(
+                client,
+                CONFIG
+            );
+
+        } else {
+
+            console.log(
+                'Leaderboard system disabled.'
+            );
+        }
 
         console.log(
             'All systems loaded.'
@@ -73,7 +105,6 @@ client.once(Events.ClientReady, async (bot) => {
             'System startup error:',
             error
         );
-
     }
 
 });
@@ -81,4 +112,3 @@ client.once(Events.ClientReady, async (bot) => {
 // -------------------- LOGIN --------------------
 
 client.login(process.env.DISCORD_TOKEN);
-// No way LOLdsfdsfshelp
