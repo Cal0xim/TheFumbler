@@ -206,3 +206,8 @@ save_snapshot(crews)
 # DELETE SCREENSHOT
 # ----------------------------
 
+try:
+    os.remove(filepath)
+    print("Screenshot deleted")
+except Exception as e:
+    print("Failed to delete screenshot:", e)

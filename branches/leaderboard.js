@@ -195,7 +195,7 @@ function scheduleLeaderboard(client, config) {
 
         setInterval(() => {
             updateLeaderboard(client, config);
-        }, 60 * 60 * 1000);
+        }, 10 * 60 * 1000);
 
     }, 30 * 1000); // 30 seconds
 }
