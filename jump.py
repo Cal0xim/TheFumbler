@@ -141,24 +141,24 @@ while running:
 
             time.sleep(0.1)
 
-            # Wiggle mouse left/right
-            for _ in range(3):
-                pyautogui.moveRel(-10, 0, duration=0.05)
-                pyautogui.moveRel(10, 0, duration=0.05)
-
-            # Return to center
+            # Move to exact center
             pyautogui.moveTo(click_x, click_y)
 
-            # Click 5 times while moving slightly
-            for i in range(5):
+            # Click center -> left -> center -> left ...
+            for i in range(15):
 
+                # Click current position
                 pyautogui.mouseDown()
                 time.sleep(0.05)
                 pyautogui.mouseUp()
 
                 print(f"Click {i + 1}")
 
-                pyautogui.moveRel(10, 0, duration=0.05)
+                # Alternate left/right 10 pixels
+                if i % 2 == 0:
+                    pyautogui.moveRel(-10, 0, duration=0.05)
+                else:
+                    pyautogui.moveRel(10, 0, duration=0.05)
 
                 time.sleep(0.05)
 

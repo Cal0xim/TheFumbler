@@ -157,6 +157,11 @@ ${text}
 \`\`\`
 `
             )
+        )
+        .addTextDisplayComponents(
+            new TextDisplayBuilder().setContent(
+                '-# VERSION: V1.0'
+            )
         );
 
     await channel.send({
