@@ -39,7 +39,7 @@ const DATA_FILE = path.join(__dirname, '..', 'data', 'ratings.json');
 const IMAGE_FILE = path.join(__dirname, '..', 'assets', 'Crews.png');
 
 const HIGHLIGHT_CREW = "Frostwhale Fumblers";
-const PostInterval = 1 //minutes
+const PostInterval = 30 //minutes
 
 const SCREENSHOT_FOLDER = path.join(
     __dirname,
