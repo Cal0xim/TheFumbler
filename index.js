@@ -122,26 +122,23 @@ client.once(
                 `[SLASH] Registered ${slashCommands.length} commands`
             );
 
-            await require(
-                './branches/seasonController'
-            )(
-                client,
-                CONFIG
-            );
+            if (CONFIG.seasonChannelId && CONFIG.seasonChannelId !== "0") {
+                await require('./branches/seasonController')(client, CONFIG);
+            } else {
+                console.log('[SEASON] disabled');
+            }
 
-            await require(
-                './branches/leaderboardController'
-            )(
-                client,
-                CONFIG
-            );
+            if (CONFIG.leaderboardChannelId && CONFIG.leaderboardChannelId !== "0") {
+                await require('./branches/leaderboardController')(client, CONFIG);
+            } else {
+                console.log('[LEADERBOARD] disabled');
+            }
 
-            await require(
-                './branches/playtimeController'
-            )(
-                client,
-                CONFIG
-            );
+            if (CONFIG.playtimeChannelId && CONFIG.playtimeChannelId !== "0") {
+                await require('./branches/playtimeController')(client, CONFIG);
+            } else {
+                console.log('[PLAYTIME] disabled');
+            }
 
             console.log(
                 'All systems loaded.'

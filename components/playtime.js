@@ -69,7 +69,7 @@ function formatPlaytime(minutes) {
 
 // -------------------- MAIN BUILDER --------------------
 
-function buildPlaytimeLeaderboard(data) {
+function buildPlaytimeLeaderboard(data, interval) {
 
     const botInfo = loadBotInfo();
 
@@ -146,10 +146,10 @@ ${text || 'No tracked players.\n'}`;
 
         const header =
         `${serverName.toUpperCase()} INFO
-        ---------------------------------------------------------------
-        Players ${meta.playing ?? 0}/${meta.maxPlayers ?? 0}
-        FPS ${Math.round(meta.fps ?? 0)}
-        Owner ${meta.owner?.displayName ?? 'Unknown'}`;
+---------------------------------------------------------------
+    Players ${meta.playing ?? 0}/${meta.maxPlayers ?? 0}
+    FPS ${Math.round(meta.fps ?? 0)}
+    Owner ${meta.owner?.displayName ?? 'Unknown'}`;
 
         components.push(
             new TextDisplayBuilder().setContent(
@@ -164,7 +164,7 @@ ${text || 'No tracked players.\n'}`;
 
     components.push(
         new TextDisplayBuilder().setContent(
-            `-# Made by: ${botInfo.owner} | v${botInfo.version}`
+            `-# Made by: ${botInfo.owner} | v${botInfo.version} | ${interval}min`
         )
     );
 

@@ -140,7 +140,7 @@ async function sendPlaytime(channel) {
     }
 
     const container =
-        buildPlaytimeLeaderboard(data);
+        buildPlaytimeLeaderboard(data, POST_INTERVAL);
 
     const ids =
         loadMessageIds();
