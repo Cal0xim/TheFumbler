@@ -179,6 +179,9 @@ while running:
         else:
 
             print("Search button not found")
+            print("SEARCH_NOT_FOUND", flush=True)
+
+            raise SystemExit(3)
 
         # ----------------------------
         # JUMP

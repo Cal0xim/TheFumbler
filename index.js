@@ -1,10 +1,13 @@
 require('dotenv').config();
-require("./bootstrap");
+require('./bootstrap');
+
+const fs = require('fs');
+const path = require('path');
 
 const {
     Client,
     GatewayIntentBits,
-    Events,
+    Events
 } = require('discord.js');
 
 // -------------------- CONFIG --------------------
@@ -27,58 +30,192 @@ const CONFIG = {
         process.env.USE_TEST === 'true'
             ? process.env.LEADERBOARD_CHANNEL_ID_TEST
             : process.env.LEADERBOARD_CHANNEL_ID,
+
+    playtimeChannelId:
+        process.env.USE_TEST === 'true'
+            ? process.env.PLAYTIME_CHANNEL_ID_TEST
+            : process.env.PLAYTIME_CHANNEL_ID,
 };
 
 // -------------------- CLIENT --------------------
 
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds]
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
+    ]
 });
+
+// -------------------- COMMAND LOADER --------------------
+
+client.commands = new Map();
+
+const commandsPath = path.join(
+    __dirname,
+    'commands'
+);
+
+const commandFiles = fs
+    .readdirSync(commandsPath)
+    .filter(file => file.endsWith('.js'));
+
+const slashCommands = [];
+
+for (const file of commandFiles) {
+
+    const command = require(
+        path.join(commandsPath, file)
+    );
+
+    if (
+        !command.data ||
+        !command.execute
+    ) {
+        console.warn(
+            `[COMMAND] ${file} missing data or execute`
+        );
+        continue;
+    }
+
+    client.commands.set(
+        command.data.name,
+        command
+    );
+
+    slashCommands.push(
+        command.data.toJSON()
+    );
+}
 
 // -------------------- STARTUP --------------------
 
-client.once(Events.ClientReady, async (bot) => {
+client.once(
+    Events.ClientReady,
+    async bot => {
 
-    console.log(
-        `Running in ${
-            CONFIG.testMode
-                ? 'TEST'
-                : 'PRODUCTION'
-        } mode`
-    );
-
-    console.log(
-        `Logged in as ${bot.user.tag}`
-    );
-
-    try {
-
-        await require('./branches/season')(
-            client,
-            CONFIG
-        );
-
-        await require('./branches/leaderboard')(
-            client,
-            CONFIG
+        console.log(
+            `Running in ${
+                CONFIG.testMode
+                    ? 'TEST'
+                    : 'PRODUCTION'
+            } mode`
         );
 
         console.log(
-            'All systems loaded.'
+            `Logged in as ${bot.user.tag}`
         );
 
-    } catch (error) {
+        try {
 
-        console.error(
-            'System startup error:',
-            error
-        );
+            // Register slash commands
+            const guild =
+                await client.guilds.fetch(
+                    CONFIG.guildId
+                );
 
+            await guild.commands.set(
+                slashCommands
+            );
+
+            console.log(
+                `[SLASH] Registered ${slashCommands.length} commands`
+            );
+
+            await require(
+                './branches/seasonController'
+            )(
+                client,
+                CONFIG
+            );
+
+            await require(
+                './branches/leaderboardController'
+            )(
+                client,
+                CONFIG
+            );
+
+            await require(
+                './branches/playtimeController'
+            )(
+                client,
+                CONFIG
+            );
+
+            console.log(
+                'All systems loaded.'
+            );
+
+        } catch (error) {
+
+            console.error(
+                'System startup error:',
+                error
+            );
+        }
     }
+);
 
-});
+// -------------------- SLASH COMMANDS --------------------
+
+client.on(
+    Events.InteractionCreate,
+    async interaction => {
+
+        if (
+            !interaction.isChatInputCommand()
+        ) {
+            return;
+        }
+
+        const command =
+            client.commands.get(
+                interaction.commandName
+            );
+
+        if (!command) {
+            return;
+        }
+
+        try {
+
+            await command.execute(
+                interaction
+            );
+
+        } catch (err) {
+
+            console.error(
+                '[COMMAND ERROR]',
+                err
+            );
+
+            if (
+                interaction.replied ||
+                interaction.deferred
+            ) {
+
+                await interaction.followUp({
+                    content:
+                        'Command failed.',
+                    ephemeral: true
+                });
+
+            } else {
+
+                await interaction.reply({
+                    content:
+                        'Command failed.',
+                    ephemeral: true
+                });
+            }
+        }
+    }
+);
 
 // -------------------- LOGIN --------------------
 
-client.login(process.env.DISCORD_TOKEN);
-// No way LOLdsfdsfshelp
+client.login(
+    process.env.DISCORD_TOKEN
+);

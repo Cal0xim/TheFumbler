@@ -77,7 +77,7 @@ screenshot = pyautogui.screenshot(region=SCREEN_REGION)
 
 filepath = os.path.join(
     SAVE_FOLDER,
-    f"screenshot_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png"
+    f"ImageLB_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png"
 )
 
 screenshot.save(filepath)
@@ -99,7 +99,8 @@ print("\nRAW OCR:\n")
 print(text)
 
 if not looks_like_leaderboard(text):
-    print("\nLeaderboard not found")
+
+    print("LEADERBOARD_NOT_FOUND")
 
     try:
         os.remove(filepath)
@@ -201,13 +202,3 @@ print("-----------------------------------")
 # ----------------------------
 
 save_snapshot(crews)
-
-# ----------------------------
-# DELETE SCREENSHOT
-# ----------------------------
-
-try:
-    os.remove(filepath)
-    print("Screenshot deleted")
-except Exception as e:
-    print("Failed to delete screenshot:", e)

@@ -13,11 +13,11 @@ const fs = require('fs');
 const path = require('path');
 
 const SEASON_LENGTH = 34560;
-const ROTATION_FILE = path.join(
+const MSG_IDS_FILE = path.join(
     __dirname,
     '..',
     'data',
-    'rotation.json'
+    'msgIDs.json'
 );
 
 const seasons = [
@@ -62,26 +62,78 @@ function getSeasonStartTimestamp(targetIndex) {
 // -------------------- STORAGE --------------------
 
 function loadRotationData() {
+
+    let data = {};
+
     try {
-        return JSON.parse(
-            fs.readFileSync(ROTATION_FILE, 'utf8')
-        );
-    } catch {
-        return {
-            messageId: null,
-            season: null,
+
+        if (fs.existsSync(MSG_IDS_FILE)) {
+
+            data = JSON.parse(
+                fs.readFileSync(
+                    MSG_IDS_FILE,
+                    'utf8'
+                )
+            );
+        }
+
+    } catch {}
+
+    // auto-create season section if missing
+    if (!data.season) {
+
+        data.season = {
+            messageId: '',
+            season: ''
         };
+
+        fs.writeFileSync(
+            MSG_IDS_FILE,
+            JSON.stringify(
+                data,
+                null,
+                2
+            )
+        );
     }
+
+    return data.season;
 }
 
-function saveRotationData(messageId, season) {
+function saveRotationData(
+    messageId,
+    season
+) {
+
+    let data = {};
+
+    try {
+
+        if (fs.existsSync(MSG_IDS_FILE)) {
+
+            data = JSON.parse(
+                fs.readFileSync(
+                    MSG_IDS_FILE,
+                    'utf8'
+                )
+            );
+        }
+
+    } catch {}
+
+    // auto-create if missing
+    data.season ??= {};
+
+    data.season.messageId =
+        String(messageId);
+
+    data.season.season =
+        season;
+
     fs.writeFileSync(
-        ROTATION_FILE,
+        MSG_IDS_FILE,
         JSON.stringify(
-            {
-                messageId,
-                season,
-            },
+            data,
             null,
             2
         )

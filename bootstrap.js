@@ -21,6 +21,22 @@ ensureFile(
 );
 
 ensureFile(
-    path.join(__dirname, "data", "rotation.json"),
-    JSON.stringify({ season: 1 }, null, 2)
+    path.join(__dirname, "data", "msgIDs.json"),
+    JSON.stringify(
+        {
+            season: {
+                messageId: 0,
+                season: ""
+            },
+            playtime: {
+                messageId: 0
+            },
+            leaderboard: {
+                old_messageId: 0,
+                new_messageId: 0
+            }
+        },
+        null,
+        2
+    )
 );
