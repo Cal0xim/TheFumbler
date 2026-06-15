@@ -4,6 +4,8 @@ require('./bootstrap');
 const fs = require('fs');
 const path = require('path');
 
+const { canUseCommand } = require('./utils/permissions');
+
 const {
     Client,
     GatewayIntentBits,
@@ -160,50 +162,37 @@ client.on(
     Events.InteractionCreate,
     async interaction => {
 
-        if (
-            !interaction.isChatInputCommand()
-        ) {
-            return;
-        }
+        if (!interaction.isChatInputCommand()) return;
 
         const command =
-            client.commands.get(
-                interaction.commandName
-            );
+            client.commands.get(interaction.commandName);
 
-        if (!command) {
-            return;
+        if (!command) return;
+
+        // -------------------- PERMISSION CHECK --------------------
+        if (!(await canUseCommand(interaction, interaction.commandName))) {
+            return interaction.reply({
+                content: "❌ You don't have permission to use this command.",
+                ephemeral: true
+            });
         }
 
         try {
 
-            await command.execute(
-                interaction
-            );
+            await command.execute(interaction);
 
         } catch (err) {
 
-            console.error(
-                '[COMMAND ERROR]',
-                err
-            );
+            console.error('[COMMAND ERROR]', err);
 
-            if (
-                interaction.replied ||
-                interaction.deferred
-            ) {
-
+            if (interaction.replied || interaction.deferred) {
                 await interaction.followUp({
-                    content:
-                        'Command failed.',
+                    content: 'Command failed.',
                     ephemeral: true
                 });
-
             } else {
-
                 await interaction.reply({
-                    content:
-                        'Command failed.',
+                    content: 'Command failed.',
                     ephemeral: true
                 });
             }
