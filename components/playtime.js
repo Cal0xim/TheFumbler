@@ -145,7 +145,7 @@ ${text || 'No tracked players.\n'}`;
         const meta = server.meta || {};
 
         const header =
-        `${serverName.toUpperCase()} INFO
+        `${serverName.toUpperCase()} info
 ---------------------------------------------------------------
     Players ${meta.playing ?? 0}/${meta.maxPlayers ?? 0}
     FPS ${Math.round(meta.fps ?? 0)}
