@@ -29,7 +29,7 @@ const MSG_IDS_FILE = path.join(
     'msgIDs.json'
 );
 
-const POST_INTERVAL = 1; // minutes
+const POST_INTERVAL = 15; // minutes
 
 // -------------------- MESSAGE IDS --------------------
 
