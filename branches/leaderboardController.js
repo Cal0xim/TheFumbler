@@ -205,6 +205,24 @@ async function sendLeaderboard(channel) {
         flags: MessageFlags.IsComponentsV2,
     });
 
+    // Delete local screenshot after successful upload
+    if (latestScreenshot && fs.existsSync(latestScreenshot)) {
+        try {
+            await fs.promises.unlink(latestScreenshot);
+
+            console.log(
+                `[SCREENSHOT] Deleted ${path.basename(latestScreenshot)}`
+            );
+
+        } catch (err) {
+
+            console.error(
+                '[SCREENSHOT DELETE ERROR]',
+                err.message
+            );
+        }
+    }
+
     // --------------------
     // ROTATE IDS
     // --------------------
