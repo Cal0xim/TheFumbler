@@ -187,9 +187,13 @@ while running:
         # JUMP
         # ----------------------------
 
+        for i in range(10):
         keyboard.press(' ')
         time.sleep(0.05)
         keyboard.release(' ')
+
+        time.sleep(0.1)  # small delay between jumps
+
 
         print(
             "Space pressed at",
