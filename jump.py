@@ -192,7 +192,7 @@ while running:
         time.sleep(0.05)
         keyboard.release(' ')
 
-        time.sleep(0.1)  # small delay between jumps
+        time.sleep(0.2)  # small delay between jumps
 
 
         print(
