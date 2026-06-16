@@ -29,7 +29,8 @@ const MSG_IDS_FILE = path.join(
     'msgIDs.json'
 );
 
-const POST_INTERVAL = 15; // minutes
+const TRACK_INTERVAL = 1;   // minutes
+const POST_INTERVAL = 15;   // minutes
 
 // -------------------- MESSAGE IDS --------------------
 
@@ -231,19 +232,62 @@ function schedulePlaytime(
     config
 ) {
 
-    setTimeout(() => {
+    setTimeout(async () => {
 
-        updatePlaytime(
-            client,
-            config
-        );
+        // First run immediately
+
+        await runPlaytimeTick();
+
+        const channel =
+            await client.channels.fetch(
+                config.playtimeChannelId
+            );
+
+        await sendPlaytime(channel);
+
+        // --------------------
+        // TRACKING LOOP
+        // --------------------
 
         setInterval(() => {
 
-            updatePlaytime(
-                client,
-                config
+            runPlaytimeTick().catch(err =>
+                console.error(
+                    '[TRACKER ERROR]',
+                    err
+                )
             );
+
+        }, TRACK_INTERVAL * 60 * 1000);
+
+        // --------------------
+        // POSTING LOOP
+        // --------------------
+
+        setInterval(async () => {
+
+            try {
+
+                const channel =
+                    await client.channels.fetch(
+                        config.playtimeChannelId
+                    );
+
+                await sendPlaytime(
+                    channel
+                );
+
+                console.log(
+                    '[PLAYTIME] Leaderboard posted'
+                );
+
+            } catch (err) {
+
+                console.error(
+                    '[PLAYTIME POST ERROR]',
+                    err
+                );
+            }
 
         }, POST_INTERVAL * 60 * 1000);
 
