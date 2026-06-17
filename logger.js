@@ -116,3 +116,5 @@ console.error = (...args) => {
 console.log(
     'Logger initialized'
 );
+
+// test
