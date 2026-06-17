@@ -173,7 +173,7 @@ ${text || 'No tracked players.\n'}`;
 
     components.push(
         new TextDisplayBuilder().setContent(
-            `-# Made by: ${botInfo.owner} | v${botInfo.version} | Update every ${interval}s`
+            `-# Made by: ${botInfo.owner} | v${botInfo.version} | Update every ${interval}m`
         )
     );
 
