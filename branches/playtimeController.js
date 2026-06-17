@@ -29,8 +29,8 @@ const MSG_IDS_FILE = path.join(
     'msgIDs.json'
 );
 
-const TRACK_INTERVAL = 1;   // minutes
-const POST_INTERVAL = 5;   // minutes
+const TRACK_INTERVAL = 15;   // seconds
+const POST_INTERVAL = 1;   // minutes
 
 // -------------------- MESSAGE IDS --------------------
 
@@ -201,7 +201,7 @@ async function updatePlaytime(
             'Updating playtime...'
         );
 
-        await runPlaytimeTick();
+        await runPlaytimeTick(TRACK_INTERVAL);
 
         const channel =
             await client.channels.fetch(
@@ -236,7 +236,7 @@ function schedulePlaytime(
 
         // First run immediately
 
-        await runPlaytimeTick();
+        await runPlaytimeTick(TRACK_INTERVAL);
 
         const channel =
             await client.channels.fetch(
@@ -251,14 +251,14 @@ function schedulePlaytime(
 
         setInterval(() => {
 
-            runPlaytimeTick().catch(err =>
+            runPlaytimeTick(TRACK_INTERVAL).catch(err =>
                 console.error(
                     '[TRACKER ERROR]',
                     err
                 )
             );
 
-        }, TRACK_INTERVAL * 60 * 1000);
+        }, TRACK_INTERVAL * 1000);
 
         // --------------------
         // POSTING LOOP

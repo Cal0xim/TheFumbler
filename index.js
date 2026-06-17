@@ -37,6 +37,11 @@ const CONFIG = {
         process.env.USE_TEST === 'true'
             ? process.env.PLAYTIME_CHANNEL_ID_TEST
             : process.env.PLAYTIME_CHANNEL_ID,
+
+    announceChannelId:
+        process.env.USE_TEST === 'true'
+            ? process.env.ANNOUNCE_CHANNEL_ID_TEST
+            : process.env.ANNOUNCE_CHANNEL_ID,
 };
 
 // -------------------- CLIENT --------------------
@@ -140,6 +145,12 @@ client.once(
                 await require('./branches/playtimeController')(client, CONFIG);
             } else {
                 console.log('[PLAYTIME] disabled');
+            }
+
+            if (CONFIG.announceChannelId && CONFIG.announceChannelId !== "0") {
+                await require('./branches/crashController')(client, CONFIG);
+            } else {
+                console.log('[CRASH ANNOUNCE] disabled');
             }
 
             console.log(

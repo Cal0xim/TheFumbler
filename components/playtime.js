@@ -48,10 +48,16 @@ function loadBotInfo() {
 
 // -------------------- FORMAT --------------------
 
-function formatPlaytime(minutes) {
+function formatPlaytime(seconds) {
 
-    if (!minutes || minutes < 60) {
-        return `${minutes || 0}m`;
+    if (!seconds) {
+        return '0s';
+    }
+
+    const minutes = Math.floor(seconds / 60);
+
+    if (minutes < 60) {
+        return `${minutes}m`;
     }
 
     const hours = Math.floor(minutes / 60);
@@ -144,6 +150,9 @@ ${text || 'No tracked players.\n'}`;
 
         const meta = server.meta || {};
 
+        const excluded = meta.excluded ?? false;
+        if (excluded) continue;
+
         const header =
         `${serverName.toUpperCase()} info
 ---------------------------------------------------------------
@@ -164,7 +173,7 @@ ${text || 'No tracked players.\n'}`;
 
     components.push(
         new TextDisplayBuilder().setContent(
-            `-# Made by: ${botInfo.owner} | v${botInfo.version} | ${interval}min`
+            `-# Made by: ${botInfo.owner} | v${botInfo.version} | Update every ${interval}s`
         )
     );
 

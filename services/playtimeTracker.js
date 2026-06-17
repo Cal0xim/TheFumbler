@@ -33,11 +33,8 @@ function saveData(data) {
 
 // -------------------- CORE TICK --------------------
 
-async function runPlaytimeTick() {
+async function runPlaytimeTick(time) {
     try {
-        console.log('\n--------------------');
-        console.log('[TRACKER] Tick started');
-        console.log('--------------------');
 
         const res = await roblox.get(
             'https://games.roblox.com/v1/games/16732694052/private-servers?limit=100'
@@ -76,16 +73,18 @@ async function runPlaytimeTick() {
             const players = server.players || [];
             const tokens = server.playerTokens || [];
 
-            console.log(`\n[TRACK] Processing server: ${name}`);
-            console.log(`[DEBUG] players=${players.length}, tokens=${tokens.length}`);
-
             // -------------------- META --------------------
+
+            const previousPlaying = serverData.meta?.playing ?? server.playing;
+            const excluded = serverData.meta?.excluded ?? false;
 
             serverData.meta = {
                 ping: server.ping,
                 fps: server.fps,
                 maxPlayers: server.maxPlayers,
                 playing: server.playing,
+                previousPlaying,
+                excluded,
                 lastUpdated: Date.now(),
                 owner: server.owner || null
             };
@@ -113,11 +112,7 @@ async function runPlaytimeTick() {
                         console.log(`[NEW] ${player.displayName} (${name})`);
                     }
 
-                    serverData.players[id].playtime += 1;
-
-                    console.log(
-                        `[TRACK] ${player.displayName} -> ${serverData.players[id].playtime} min`
-                    );
+                    serverData.players[id].playtime += time;
                 }
 
             } else if (tokens.length > 0) {
@@ -137,17 +132,14 @@ async function runPlaytimeTick() {
                         };
                     }
 
-                    serverData.players[id].playtime += 1;
+                    serverData.players[id].playtime += time;
 
-                    console.log(`[TRACK] token user -> ${serverData.players[id].playtime} min`);
                 }
             }
         }
 
         saveData(data);
 
-        console.log('\n[TRACKER] Tick complete');
-        console.log('--------------------\n');
 
     } catch (err) {
         console.error('[TRACKER ERROR]', err.response?.data || err.message);
