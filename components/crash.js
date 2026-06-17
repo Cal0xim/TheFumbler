@@ -25,7 +25,7 @@ function buildCrash(serverName, previousCount) {
 
     components.push(
         new TextDisplayBuilder().setContent(
-`Possibility of **${serverName}** crashing`
+`<@1513565842594332722> Possibility of **${serverName}** crashing`
         )
     );
 
@@ -45,7 +45,7 @@ function buildCrash(serverName, previousCount) {
 
     components.push(
         new TextDisplayBuilder().setContent(
-`-# Crash detection system`
+` `
         )
     );
 
