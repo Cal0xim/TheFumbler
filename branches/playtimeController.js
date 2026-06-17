@@ -30,7 +30,7 @@ const MSG_IDS_FILE = path.join(
 );
 
 const TRACK_INTERVAL = 15;   // seconds
-const POST_INTERVAL = 1;   // minutes
+const POST_INTERVAL = 5;   // minutes
 
 // -------------------- MESSAGE IDS --------------------
 
