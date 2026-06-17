@@ -9,6 +9,8 @@ const {
     buildCrash
 } = require('../components/crash');
 
+let crashLoopStarted = false;
+
 // -------------------- CONFIG --------------------
 
 const DATA_PATH = path.join(
@@ -27,6 +29,10 @@ let clientRef = null;
 let configRef = null;
 
 const recentlyAnnounced = new Set();
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 // -------------------- LOAD DATA --------------------
 
@@ -124,56 +130,50 @@ async function checkCrashes() {
 
 // -------------------- LOOP --------------------
 
-function scheduleCrashChecks() {
+async function scheduleCrashChecks() {
 
-    setTimeout(() => {
+    await sleep(20 * 1000);
 
-        // First run
+    let lastCleanup = Date.now();
 
-        checkCrashes().catch(err =>
-            console.error(
-                '[CRASH STARTUP ERROR]',
-                err
-            )
-        );
+    while (crashLoopStarted) {
 
-        // Repeating loop
+        const start = Date.now();
 
-        setInterval(() => {
+        try {
+            await checkCrashes();
+        } catch (err) {
+            console.error('[CRASH LOOP ERROR]', err);
+        }
 
-            checkCrashes().catch(err =>
-                console.error(
-                    '[CRASH LOOP ERROR]',
-                    err
-                )
-            );
-
-        }, CHECK_INTERVAL * 1000);
-
-        // Cleanup cache every hour
-
-        setInterval(() => {
-
+        if (Date.now() - lastCleanup >= 60 * 60 * 1000) {
             recentlyAnnounced.clear();
+            console.log('[CRASH] Cleared announcement cache');
+            lastCleanup = Date.now();
+        }
 
-            console.log(
-                '[CRASH] Cleared announcement cache'
-            );
+        const elapsed = Date.now() - start;
 
-        }, 60 * 60 * 1000);
+        // ensures stable spacing even if checkCrashes is slow
+        const wait = Math.max(0, CHECK_INTERVAL * 1000 - elapsed);
 
-    }, 20 * 1000);
+        await sleep(wait);
+    }
 }
 
 // -------------------- EXPORT --------------------
 
-module.exports = async (
-    client,
-    config
-) => {
+module.exports = async (client, config) => {
 
     clientRef = client;
     configRef = config;
+
+    if (crashLoopStarted) {
+        console.log('[CRASH] Loop already running — skipping duplicate start');
+        return;
+    }
+
+    crashLoopStarted = true;
 
     scheduleCrashChecks();
 

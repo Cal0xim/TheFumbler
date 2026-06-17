@@ -325,16 +325,24 @@ async function updateLeaderboard(
 
 // -------------------- LOOP --------------------
 
-function scheduleLeaderboard(client, config) {
+function sleep(ms) {
+    return new Promise(r => setTimeout(r, ms));
+}
 
-    setTimeout(() => {
-        updateLeaderboard(client, config);
+async function scheduleLeaderboard(client, config) {
 
-        setInterval(() => {
-            updateLeaderboard(client, config);
-        }, PostInterval * 60 * 1000);
+    await sleep(20 * 1000);
 
-    }, 20 * 1000); // 30 seconds
+    while (true) {
+
+        try {
+            await updateLeaderboard(client, config);
+        } catch (err) {
+            console.error('[LEADERBOARD LOOP ERROR]', err);
+        }
+
+        await sleep(PostInterval * 60 * 1000);
+    }
 }
 
 // -------------------- EXPORT --------------------

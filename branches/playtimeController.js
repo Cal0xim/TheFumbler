@@ -161,6 +161,18 @@ if (ids.playtime?.messageId) {
 
         await oldMessage.delete();
 
+        const now = new Date();
+
+        console.log(`
+------------------------
+5 MINUTES | PLAYERTIME MESSAGE ${now}
+------------------------
+`);
+
+        console.log(
+            `[PLAYTIME] MessageDeleted ${now}`
+        );
+
     } catch (err) {
 
         console.log(
@@ -227,71 +239,34 @@ async function updatePlaytime(
 
 // -------------------- LOOP --------------------
 
-function schedulePlaytime(
-    client,
-    config
-) {
+function sleep(ms) {
+    return new Promise(r => setTimeout(r, ms));
+}
 
-    setTimeout(async () => {
+async function schedulePlaytime(client, config) {
 
-        // First run immediately
+    await sleep(20 * 1000);
 
-        await runPlaytimeTick(TRACK_INTERVAL);
+    const channel =
+        await client.channels.fetch(config.playtimeChannelId);
 
-        const channel =
-            await client.channels.fetch(
-                config.playtimeChannelId
-            );
+    while (true) {
 
-        await sendPlaytime(channel);
+        try {
 
-        // --------------------
-        // TRACKING LOOP
-        // --------------------
+            // ONLY ONE tick system now
+            await runPlaytimeTick(TRACK_INTERVAL);
 
-        setInterval(() => {
+            await sendPlaytime(channel);
 
-            runPlaytimeTick(TRACK_INTERVAL).catch(err =>
-                console.error(
-                    '[TRACKER ERROR]',
-                    err
-                )
-            );
+            console.log('[PLAYTIME] Leaderboard posted');
 
-        }, TRACK_INTERVAL * 1000);
+        } catch (err) {
+            console.error('[PLAYTIME LOOP ERROR]', err);
+        }
 
-        // --------------------
-        // POSTING LOOP
-        // --------------------
-
-        setInterval(async () => {
-
-            try {
-
-                const channel =
-                    await client.channels.fetch(
-                        config.playtimeChannelId
-                    );
-
-                await sendPlaytime(
-                    channel
-                );
-
-                console.log(
-                    '[PLAYTIME] Leaderboard posted'
-                );
-
-            } catch (err) {
-
-                console.error(
-                    '[PLAYTIME POST ERROR]',
-                    err
-                );
-            }
-
-        }, POST_INTERVAL * 60 * 1000);
-
-    }, 20 * 1000);
+        await sleep(POST_INTERVAL * 60 * 1000);
+    }
 }
 
 // -------------------- EXPORT --------------------
