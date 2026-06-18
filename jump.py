@@ -179,7 +179,41 @@ while running:
         else:
 
             print("Search button not found")
-            print("SEARCH_NOT_FOUND", flush=True)
+
+            timestamp = time.strftime(
+                "%Y-%m-%d_%H-%M-%S"
+            )
+
+            # Full screen
+            full_file = (
+                f"SEARCH_NOT_FOUND_{timestamp}.png"
+            )
+
+            pyautogui.screenshot().save(
+                full_file
+            )
+
+            # Search region only
+            region_file = (
+                f"SEARCH_REGION_{timestamp}.png"
+            )
+
+            pyautogui.screenshot(
+                region=SEARCH_REGION
+            ).save(region_file)
+
+            print(
+                f"Saved: {full_file}"
+            )
+
+            print(
+                f"Saved: {region_file}"
+            )
+
+            print(
+                "SEARCH_NOT_FOUND",
+                flush=True
+            )
 
             raise SystemExit(3)
 

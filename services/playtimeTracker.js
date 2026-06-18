@@ -44,12 +44,6 @@ async function runPlaytimeTick(time) {
 
         console.log(`\n[DEBUG] Servers found: ${servers.length}`);
 
-        for (const s of servers) {
-            console.log(
-                `[SERVER] ${s.name} | playing: ${s.playing} | players: ${s.players?.length ?? 'undefined'} | tokens: ${s.playerTokens?.length ?? 0}`
-            );
-        }
-
         const data = loadData();
 
         // Ensure base structure
