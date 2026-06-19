@@ -243,30 +243,73 @@ function sleep(ms) {
     return new Promise(r => setTimeout(r, ms));
 }
 
-async function schedulePlaytime(client, config) {
+function sleep(ms) {
+    return new Promise(r => setTimeout(r, ms));
+}
 
-    await sleep(20 * 1000);
-
-    const channel =
-        await client.channels.fetch(config.playtimeChannelId);
+async function trackingLoop() {
 
     while (true) {
 
         try {
 
-            // ONLY ONE tick system now
-            await runPlaytimeTick(TRACK_INTERVAL);
-
-            await sendPlaytime(channel);
-
-            console.log('[PLAYTIME] Leaderboard posted');
+            await runPlaytimeTick(
+                TRACK_INTERVAL
+            );
 
         } catch (err) {
-            console.error('[PLAYTIME LOOP ERROR]', err);
+
+            console.error(
+                '[TRACKING LOOP ERROR]',
+                err
+            );
         }
 
-        await sleep(POST_INTERVAL * 60 * 1000);
+        await sleep(
+            TRACK_INTERVAL * 1000
+        );
     }
+}
+
+async function postingLoop(channel) {
+
+    while (true) {
+
+        try {
+
+            await sendPlaytime(
+                channel
+            );
+
+            console.log(
+                '[PLAYTIME] Leaderboard posted'
+            );
+
+        } catch (err) {
+
+            console.error(
+                '[POSTING LOOP ERROR]',
+                err
+            );
+        }
+
+        await sleep(
+            POST_INTERVAL * 60 * 1000
+        );
+    }
+}
+
+async function schedulePlaytime(client, config) {
+
+    await sleep(20 * 1000);
+
+    const channel =
+        await client.channels.fetch(
+            config.playtimeChannelId
+        );
+
+    trackingLoop();
+    postingLoop(channel);
 }
 
 // -------------------- EXPORT --------------------

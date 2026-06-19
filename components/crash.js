@@ -3,51 +3,29 @@ const {
     TextDisplayBuilder
 } = require('discord.js');
 
-// -------------------- BUILDER --------------------
-
 function buildCrash(serverName, previousCount) {
 
     const components = [];
 
-    // --------------------
-    // HEADER
-    // --------------------
-
     components.push(
         new TextDisplayBuilder().setContent(
-`# CRASH ANNOUNCER`
+            `# CRASH ANNOUNCER`
         )
     );
 
-    // --------------------
-    // SERVER WARNING
-    // --------------------
-
     components.push(
         new TextDisplayBuilder().setContent(
-`<@1513565842594332722> Possibility of **${serverName}** crashing`
+            `<@1513565842594332722> Possibility of **${serverName}** crashing`
         )
     );
 
-    // --------------------
-    // PLAYER COUNT
-    // --------------------
-
     components.push(
         new TextDisplayBuilder().setContent(
-`Playercount: **${previousCount} → 0**`
+            `Playercount: **${previousCount} → 0**`
         )
     );
 
-    // --------------------
-    // FOOTER
-    // --------------------
-
-    components.push(
-        new TextDisplayBuilder().setContent(
-` `
-        )
-    );
+    // ❌ REMOVE EMPTY TEXT DISPLAY COMPLETELY
 
     return new ContainerBuilder()
         .setAccentColor(0xFF0000)
