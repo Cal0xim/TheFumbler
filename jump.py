@@ -189,6 +189,7 @@ while running:
                 f"SEARCH_NOT_FOUND_{timestamp}.png"
             )
 
+
             pyautogui.screenshot().save(
                 full_file
             )
@@ -214,6 +215,8 @@ while running:
                 "SEARCH_NOT_FOUND",
                 flush=True
             )
+
+            print(f"Search match: {max_val:.3f}")
 
             raise SystemExit(3)
 
