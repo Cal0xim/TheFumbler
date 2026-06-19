@@ -3,7 +3,7 @@ const path = require('path');
 
 let jumpProcess = null;
 
-function startJumpMacro(onSearchFail) {
+function startJumpMacro() {
 
     if (jumpProcess) {
         console.log('[JUMP] Already running');
@@ -40,7 +40,6 @@ function startJumpMacro(onSearchFail) {
                     '[JUMP] Search failed'
                 );
 
-                onSearchFail?.();
             }
         }
     });

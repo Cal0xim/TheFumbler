@@ -348,7 +348,7 @@ async function scheduleLeaderboard(client, config) {
 // -------------------- EXPORT --------------------
 
 module.exports = async (client, config) => {
-    startJumpMacro(client, config);
+    startJumpMacro();
     scheduleLeaderboard(client, config);
 
     console.log('Leaderboard system loaded.');
