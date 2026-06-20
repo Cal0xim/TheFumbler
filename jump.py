@@ -294,7 +294,7 @@ while running:
                 f"at ({click_x}, {click_y})"
             )
 
-            smooth_move(click_x, click_y, steps=50)
+            smooth_move(click_x, click_y, steps=150)
 
             time.sleep(0.1)
 
