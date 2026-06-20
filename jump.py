@@ -197,10 +197,10 @@ def find_search_best():
             1
         )
 
-    cv2.imwrite(
-        os.path.join(DEBUG_FOLDER, f"search_{timestamp}.png"),
-        debug_img
-    )
+    #cv2.imwrite(
+    #    os.path.join(DEBUG_FOLDER, f"search_{timestamp}.png"),
+    #    debug_img
+    #)
 
     return best_overall, best_loc, best_size
 

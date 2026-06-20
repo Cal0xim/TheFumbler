@@ -1028,3 +1028,40 @@ Updated OldStats -> NewStats
 [2026-06-20T15:43:53.179Z] [LOG] [JUMP] Click 15
 [2026-06-20T15:43:53.793Z] [LOG] [JUMP] Finished click sequence
 [2026-06-20T15:43:55.307Z] [LOG] [JUMP] Space pressed at 17:43:55
+[2026-06-20T15:45:02.452Z] [LOG] Logger initialized
+[2026-06-20T15:45:02.461Z] [LOG] ◇ injected env (14) from .env [2m// tip: ⌘ suppress logs { quiet: true }[0m
+[2026-06-20T15:45:02.463Z] [LOG] [PERMISSIONS] file loaded
+[2026-06-20T15:45:04.147Z] [LOG] Running in TEST mode
+[2026-06-20T15:45:04.148Z] [LOG] Logged in as The Fumbler#5097
+[2026-06-20T15:45:04.361Z] [LOG] [SLASH] Registered 2 commands
+[2026-06-20T15:45:06.706Z] [LOG] Season unchanged — using existing message.
+[2026-06-20T15:45:06.707Z] [LOG] Next rotation in 12413s
+[2026-06-20T15:45:06.795Z] [LOG] [JUMP] Starting jump.py
+[2026-06-20T15:45:06.805Z] [LOG] Leaderboard system loaded.
+[2026-06-20T15:45:06.810Z] [LOG] ◇ injected env (0) from .env [2m// tip: ⌘ suppress logs { quiet: true }[0m
+[2026-06-20T15:45:06.870Z] [LOG] Playtime system loaded.
+[2026-06-20T15:45:06.873Z] [LOG] Crash system loaded. (10s interval)
+[2026-06-20T15:45:06.873Z] [LOG] All systems loaded.
+[2026-06-20T15:45:07.151Z] [LOG] [JUMP] Macro started: pressing SPACE every 5 minutes
+[2026-06-20T15:45:07.152Z] [LOG] [JUMP] Press Q to stop
+[2026-06-20T15:45:07.157Z] [LOG] [JUMP] Checking for Search.png...
+[2026-06-20T15:45:07.358Z] [LOG] [JUMP] [Search Attempt 1] score=0.705
+[2026-06-20T15:45:07.359Z] [LOG] [JUMP] Retry 1/4 score=0.705
+[2026-06-20T15:45:07.360Z] [LOG] [JUMP] FOUND (0.705) -> (1607,548)
+[2026-06-20T15:45:13.461Z] [LOG] [JUMP] Click 1
+[2026-06-20T15:45:13.864Z] [LOG] [JUMP] Click 2
+[2026-06-20T15:45:14.266Z] [LOG] [JUMP] Click 3
+[2026-06-20T15:45:14.668Z] [LOG] [JUMP] Click 4
+[2026-06-20T15:45:15.070Z] [LOG] [JUMP] Click 5
+[2026-06-20T15:45:15.473Z] [LOG] [JUMP] Click 6
+[2026-06-20T15:45:15.875Z] [LOG] [JUMP] Click 7
+[2026-06-20T15:45:16.278Z] [LOG] [JUMP] Click 8
+[2026-06-20T15:45:16.681Z] [LOG] [JUMP] Click 9
+[2026-06-20T15:45:17.085Z] [LOG] [JUMP] Click 10
+[2026-06-20T15:45:17.487Z] [LOG] [JUMP] Click 11
+[2026-06-20T15:45:17.889Z] [LOG] [JUMP] Click 12
+[2026-06-20T15:45:18.292Z] [LOG] [JUMP] Click 13
+[2026-06-20T15:45:18.694Z] [LOG] [JUMP] Click 14
+[2026-06-20T15:45:19.097Z] [LOG] [JUMP] Click 15
+[2026-06-20T15:45:19.711Z] [LOG] [JUMP] Finished click sequence
+[2026-06-20T15:45:21.225Z] [LOG] [JUMP] Space pressed at 17:45:21
