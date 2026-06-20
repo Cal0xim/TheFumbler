@@ -175,3 +175,160 @@ Updated OldStats -> NewStats
 [2026-06-20T14:22:33.851Z] [LOG] [JUMP] Finished click sequence
 [2026-06-20T14:22:34.313Z] [LOG] [JUMP] Moved mouse right
 [2026-06-20T14:22:35.828Z] [LOG] [JUMP] Space pressed at 16:22:35
+[2026-06-20T15:17:12.488Z] [LOG] Logger initialized
+[2026-06-20T15:17:12.497Z] [LOG] ◇ injected env (14) from .env [2m// tip: ◈ secrets for agents [www.dotenvx.com][0m
+[2026-06-20T15:17:12.501Z] [LOG] [PERMISSIONS] file loaded
+[2026-06-20T15:17:14.155Z] [LOG] Running in TEST mode
+[2026-06-20T15:17:14.156Z] [LOG] Logged in as The Fumbler#5097
+[2026-06-20T15:17:14.386Z] [LOG] [SLASH] Registered 2 commands
+[2026-06-20T15:17:14.714Z] [LOG] Season unchanged — using existing message.
+[2026-06-20T15:17:14.715Z] [LOG] Next rotation in 14085s
+[2026-06-20T15:17:14.804Z] [LOG] [JUMP] Starting jump.py
+[2026-06-20T15:17:14.813Z] [LOG] Leaderboard system loaded.
+[2026-06-20T15:17:14.816Z] [LOG] ◇ injected env (0) from .env [2m// tip: ⌘ enable debugging { debug: true }[0m
+[2026-06-20T15:17:14.877Z] [LOG] Playtime system loaded.
+[2026-06-20T15:17:14.880Z] [LOG] Crash system loaded. (10s interval)
+[2026-06-20T15:17:14.880Z] [LOG] All systems loaded.
+[2026-06-20T15:17:15.192Z] [LOG] [JUMP] Macro started: pressing SPACE every 5 minutes
+[2026-06-20T15:17:15.193Z] [LOG] [JUMP] Press Q to stop
+[2026-06-20T15:17:15.198Z] [LOG] [JUMP] Checking for Search.png...
+[2026-06-20T15:17:15.244Z] [LOG] [JUMP] Attempt 1/5 score=0.706
+[2026-06-20T15:17:15.584Z] [LOG] [JUMP] Attempt 2/5 score=0.706
+[2026-06-20T15:17:15.916Z] [LOG] [JUMP] Attempt 3/5 score=0.705
+[2026-06-20T15:17:16.256Z] [LOG] [JUMP] Attempt 4/5 score=0.705
+[2026-06-20T15:17:16.595Z] [LOG] [JUMP] Attempt 5/5 score=0.705
+[2026-06-20T15:17:16.895Z] [LOG] [JUMP] Search NOT found after retries
+[2026-06-20T15:17:16.896Z] [LOG] [JUMP] SEARCH_NOT_FOUND
+[2026-06-20T15:17:16.897Z] [LOG] [JUMP] Search failed
+[2026-06-20T15:17:16.946Z] [LOG] [JUMP] Process exited. code=3 signal=null
+[2026-06-20T15:17:16.947Z] [LOG] [JUMP] Process closed. code=3
+[2026-06-20T15:17:34.820Z] [LOG] Updating leaderboard...
+[2026-06-20T15:17:37.085Z] [LOG] Logger initialized
+[2026-06-20T15:17:37.093Z] [LOG] ◇ injected env (14) from .env [2m// tip: ◈ encrypted .env [www.dotenvx.com][0m
+[2026-06-20T15:17:37.095Z] [LOG] [PERMISSIONS] file loaded
+[2026-06-20T15:17:38.587Z] [LOG] Running in TEST mode
+[2026-06-20T15:17:38.588Z] [LOG] Logged in as The Fumbler#5097
+[2026-06-20T15:17:38.797Z] [LOG] [SLASH] Registered 2 commands
+[2026-06-20T15:17:39.112Z] [LOG] Season unchanged — using existing message.
+[2026-06-20T15:17:39.112Z] [LOG] Next rotation in 14061s
+[2026-06-20T15:17:39.204Z] [LOG] [JUMP] Starting jump.py
+[2026-06-20T15:17:39.214Z] [LOG] Leaderboard system loaded.
+[2026-06-20T15:17:39.217Z] [LOG] ◇ injected env (0) from .env [2m// tip: ⌘ custom filepath { path: '/custom/path/.env' }[0m
+[2026-06-20T15:17:39.269Z] [LOG] Playtime system loaded.
+[2026-06-20T15:17:39.271Z] [LOG] Crash system loaded. (10s interval)
+[2026-06-20T15:17:39.272Z] [LOG] All systems loaded.
+[2026-06-20T15:17:39.556Z] [LOG] [JUMP] Macro started: pressing SPACE every 5 minutes
+[2026-06-20T15:17:39.556Z] [LOG] [JUMP] Press Q to stop
+[2026-06-20T15:17:39.563Z] [LOG] [JUMP] Checking for Search.png...
+[2026-06-20T15:17:39.620Z] [LOG] [JUMP] Attempt 1/5 score=0.706
+[2026-06-20T15:17:39.965Z] [LOG] [JUMP] Attempt 2/5 score=0.706
+[2026-06-20T15:17:40.321Z] [LOG] [JUMP] Attempt 3/5 score=0.706
+[2026-06-20T15:17:40.670Z] [LOG] [JUMP] Attempt 4/5 score=0.704
+[2026-06-20T15:17:41.003Z] [LOG] [JUMP] Attempt 5/5 score=0.704
+[2026-06-20T15:17:41.304Z] [LOG] [JUMP] Search NOT found after retries
+[2026-06-20T15:17:41.304Z] [LOG] [JUMP] SEARCH_NOT_FOUND
+[2026-06-20T15:17:41.305Z] [LOG] [JUMP] Search failed
+[2026-06-20T15:17:41.354Z] [LOG] [JUMP] Process exited. code=3 signal=null
+[2026-06-20T15:17:41.354Z] [LOG] [JUMP] Process closed. code=3
+[2026-06-20T15:17:53.446Z] [LOG] Logger initialized
+[2026-06-20T15:17:53.454Z] [LOG] ◇ injected env (14) from .env [2m// tip: ⌘ custom filepath { path: '/custom/path/.env' }[0m
+[2026-06-20T15:17:53.456Z] [LOG] [PERMISSIONS] file loaded
+[2026-06-20T15:17:55.032Z] [LOG] Running in TEST mode
+[2026-06-20T15:17:55.033Z] [LOG] Logged in as The Fumbler#5097
+[2026-06-20T15:17:55.228Z] [LOG] [SLASH] Registered 2 commands
+[2026-06-20T15:17:55.520Z] [LOG] Season unchanged — using existing message.
+[2026-06-20T15:17:55.521Z] [LOG] Next rotation in 14044s
+[2026-06-20T15:17:55.606Z] [LOG] [JUMP] Starting jump.py
+[2026-06-20T15:17:55.614Z] [LOG] Leaderboard system loaded.
+[2026-06-20T15:17:55.616Z] [LOG] ◇ injected env (0) from .env [2m// tip: ⌁ auth for agents [www.vestauth.com][0m
+[2026-06-20T15:17:55.677Z] [LOG] Playtime system loaded.
+[2026-06-20T15:17:55.679Z] [LOG] Crash system loaded. (10s interval)
+[2026-06-20T15:17:55.680Z] [LOG] All systems loaded.
+[2026-06-20T15:17:55.961Z] [LOG] [JUMP] Macro started: pressing SPACE every 5 minutes
+[2026-06-20T15:17:55.961Z] [LOG] [JUMP] Press Q to stop
+[2026-06-20T15:17:55.966Z] [LOG] [JUMP] Checking for Search.png...
+[2026-06-20T15:17:56.011Z] [LOG] [JUMP] Attempt 1/5 score=0.704
+[2026-06-20T15:17:56.012Z] [LOG] [JUMP] FOUND Search (0.704) at (1563,592)
+[2026-06-20T15:18:02.113Z] [LOG] [JUMP] Click 1
+[2026-06-20T15:18:02.517Z] [LOG] [JUMP] Click 2
+[2026-06-20T15:18:02.919Z] [LOG] [JUMP] Click 3
+[2026-06-20T15:18:03.322Z] [LOG] [JUMP] Click 4
+[2026-06-20T15:18:03.724Z] [LOG] [JUMP] Click 5
+[2026-06-20T15:18:04.128Z] [LOG] [JUMP] Click 6
+[2026-06-20T15:18:04.530Z] [LOG] [JUMP] Click 7
+[2026-06-20T15:18:04.934Z] [LOG] [JUMP] Click 8
+[2026-06-20T15:18:05.337Z] [LOG] [JUMP] Click 9
+[2026-06-20T15:18:05.739Z] [LOG] [JUMP] Click 10
+[2026-06-20T15:18:06.142Z] [LOG] [JUMP] Click 11
+[2026-06-20T15:18:06.545Z] [LOG] [JUMP] Click 12
+[2026-06-20T15:18:06.948Z] [LOG] [JUMP] Click 13
+[2026-06-20T15:18:07.351Z] [LOG] [JUMP] Click 14
+[2026-06-20T15:18:07.754Z] [LOG] [JUMP] Click 15
+[2026-06-20T15:18:07.905Z] [LOG] [JUMP] Finished click sequence
+[2026-06-20T15:18:09.882Z] [LOG] [JUMP] Space pressed at 17:18:09
+[2026-06-20T15:19:00.175Z] [LOG] Logger initialized
+[2026-06-20T15:19:00.183Z] [LOG] ◇ injected env (14) from .env [2m// tip: ⌘ custom filepath { path: '/custom/path/.env' }[0m
+[2026-06-20T15:19:00.186Z] [LOG] [PERMISSIONS] file loaded
+[2026-06-20T15:19:01.893Z] [LOG] Running in TEST mode
+[2026-06-20T15:19:01.894Z] [LOG] Logged in as The Fumbler#5097
+[2026-06-20T15:19:02.147Z] [LOG] [SLASH] Registered 2 commands
+[2026-06-20T15:19:02.580Z] [LOG] Season unchanged — using existing message.
+[2026-06-20T15:19:02.581Z] [LOG] Next rotation in 13977s
+[2026-06-20T15:19:02.669Z] [LOG] [JUMP] Starting jump.py
+[2026-06-20T15:19:02.680Z] [LOG] Leaderboard system loaded.
+[2026-06-20T15:19:02.684Z] [LOG] ◇ injected env (0) from .env [2m// tip: ◈ encrypted .env [www.dotenvx.com][0m
+[2026-06-20T15:19:02.741Z] [LOG] Playtime system loaded.
+[2026-06-20T15:19:02.743Z] [LOG] Crash system loaded. (10s interval)
+[2026-06-20T15:19:02.743Z] [LOG] All systems loaded.
+[2026-06-20T15:19:03.024Z] [LOG] [JUMP] Macro started: pressing SPACE every 5 minutes
+[2026-06-20T15:19:03.025Z] [LOG] [JUMP] Press Q to stop
+[2026-06-20T15:19:03.029Z] [LOG] [JUMP] Checking for Search.png...
+[2026-06-20T15:19:03.077Z] [LOG] [JUMP] Attempt 1/5 score=0.705
+[2026-06-20T15:19:03.078Z] [LOG] [JUMP] FOUND Search (0.705) at (1563,592)
+[2026-06-20T15:19:09.180Z] [LOG] [JUMP] Click 1
+[2026-06-20T15:19:09.583Z] [LOG] [JUMP] Click 2
+[2026-06-20T15:19:09.986Z] [LOG] [JUMP] Click 3
+[2026-06-20T15:19:10.389Z] [LOG] [JUMP] Click 4
+[2026-06-20T15:19:10.793Z] [LOG] [JUMP] Click 5
+[2026-06-20T15:19:11.195Z] [LOG] [JUMP] Click 6
+[2026-06-20T15:19:11.598Z] [LOG] [JUMP] Click 7
+[2026-06-20T15:19:12.000Z] [LOG] [JUMP] Click 8
+[2026-06-20T15:19:12.404Z] [LOG] [JUMP] Click 9
+[2026-06-20T15:19:12.806Z] [LOG] [JUMP] Click 10
+[2026-06-20T15:19:13.209Z] [LOG] [JUMP] Click 11
+[2026-06-20T15:19:13.612Z] [LOG] [JUMP] Click 12
+[2026-06-20T15:19:14.015Z] [LOG] [JUMP] Click 13
+[2026-06-20T15:19:14.418Z] [LOG] [JUMP] Click 14
+[2026-06-20T15:19:14.820Z] [LOG] [JUMP] Click 15
+[2026-06-20T15:19:14.971Z] [LOG] [JUMP] Finished click sequence
+[2026-06-20T15:19:16.951Z] [LOG] [JUMP] Space pressed at 17:19:16
+[2026-06-20T15:19:26.342Z] [LOG] Logger initialized
+[2026-06-20T15:19:26.352Z] [LOG] ◇ injected env (14) from .env [2m// tip: ⌘ suppress logs { quiet: true }[0m
+[2026-06-20T15:19:26.354Z] [LOG] [PERMISSIONS] file loaded
+[2026-06-20T15:19:27.981Z] [LOG] Running in TEST mode
+[2026-06-20T15:19:27.982Z] [LOG] Logged in as The Fumbler#5097
+[2026-06-20T15:19:28.364Z] [LOG] [SLASH] Registered 2 commands
+[2026-06-20T15:19:28.674Z] [LOG] Season unchanged — using existing message.
+[2026-06-20T15:19:28.674Z] [LOG] Next rotation in 13951s
+[2026-06-20T15:19:28.762Z] [LOG] [JUMP] Starting jump.py
+[2026-06-20T15:19:28.773Z] [LOG] Leaderboard system loaded.
+[2026-06-20T15:19:28.776Z] [LOG] ◇ injected env (0) from .env [2m// tip: ⌘ suppress logs { quiet: true }[0m
+[2026-06-20T15:19:28.832Z] [LOG] Playtime system loaded.
+[2026-06-20T15:19:28.834Z] [LOG] Crash system loaded. (10s interval)
+[2026-06-20T15:19:28.835Z] [LOG] All systems loaded.
+[2026-06-20T15:19:29.111Z] [LOG] [JUMP] Macro started: pressing SPACE every 5 minutes
+[2026-06-20T15:19:29.112Z] [LOG] [JUMP] Press Q to stop
+[2026-06-20T15:19:29.117Z] [LOG] [JUMP] Checking for Search.png...
+[2026-06-20T15:19:29.174Z] [LOG] [JUMP] Attempt 1/5 score=0.705
+[2026-06-20T15:19:29.514Z] [LOG] [JUMP] Attempt 2/5 score=0.705
+[2026-06-20T15:19:29.867Z] [LOG] [JUMP] Attempt 3/5 score=0.705
+[2026-06-20T15:19:30.213Z] [LOG] [JUMP] Attempt 4/5 score=0.705
+[2026-06-20T15:19:30.563Z] [LOG] [JUMP] Attempt 5/5 score=0.705
+[2026-06-20T15:19:30.864Z] [LOG] [JUMP] Search NOT found after retries
+[2026-06-20T15:19:31.166Z] [LOG] [JUMP] Saved: SEARCH_NOT_FOUND_2026-06-20_17-19-30.png
+[2026-06-20T15:19:31.167Z] [LOG] [JUMP] Search failed
+[2026-06-20T15:19:31.168Z] [LOG] [JUMP] Saved: SEARCH_REGION_2026-06-20_17-19-30.png
+[2026-06-20T15:19:31.168Z] [LOG] [JUMP] SEARCH_NOT_FOUND
+[2026-06-20T15:19:31.169Z] [LOG] [JUMP] Search failed
+[2026-06-20T15:19:31.208Z] [LOG] [JUMP] Process exited. code=3 signal=null
+[2026-06-20T15:19:31.208Z] [LOG] [JUMP] Process closed. code=3

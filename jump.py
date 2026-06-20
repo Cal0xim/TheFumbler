@@ -16,11 +16,7 @@ SEARCH_REGION = (1521, 453, 184, 128)
 
 SEARCH_IMAGE = "macroImages/Search.png"
 
-MATCH_THRESHOLD = 0.70  # lowered for improved detection
-
-MAX_RETRIES = 5
-
-SCALES = [0.90, 0.95, 1.00, 1.05, 1.10]
+MATCH_THRESHOLD = 0.95
 
 pyautogui.FAILSAFE = True
 
@@ -28,13 +24,14 @@ pyautogui.FAILSAFE = True
 # LOAD TEMPLATE
 # ----------------------------
 
-template_original = cv2.imread(SEARCH_IMAGE, cv2.IMREAD_GRAYSCALE)
+template = cv2.imread(
+    SEARCH_IMAGE,
+    cv2.IMREAD_GRAYSCALE
+)
 
-if template_original is None:
+if template is None:
     print(f"ERROR: {SEARCH_IMAGE} not found")
     raise SystemExit(1)
-
-template_edges = cv2.Canny(template_original, 50, 150)
 
 # ----------------------------
 # KEYBOARD
@@ -42,14 +39,16 @@ template_edges = cv2.Canny(template_original, 50, 150)
 
 keyboard = Controller()
 
+# Run immediately on startup
 last_press = time.time() - INTERVAL
+
 running = True
 
 print("Macro started: pressing SPACE every 5 minutes")
 print("Press Q to stop")
 
 # ----------------------------
-# STOP KEY
+# STOP KEY (Q)
 # ----------------------------
 
 def on_press(key):
@@ -62,76 +61,8 @@ def on_press(key):
     except:
         pass
 
-Listener(on_press=on_press).start()
-
-# ----------------------------
-# OLD MOVEMENT (UNCHANGED EXACTLY)
-# ----------------------------
-
-def smooth_move_to(click_x, click_y):
-
-    start_x, start_y = pyautogui.position()
-
-    steps = 50
-
-    for i in range(steps + 1):
-
-        t = i / steps
-
-        x = start_x + (click_x - start_x) * t
-        y = start_y + (click_y - start_y) * t
-
-        pyautogui.moveTo(x, y)
-        time.sleep(0.01)
-
-    time.sleep(0.1)
-
-    pyautogui.moveTo(click_x, click_y)
-
-# ----------------------------
-# NEW DETECTION (IMPROVED)
-# ----------------------------
-
-def find_search():
-
-    best_score = -1
-    best_loc = None
-    best_size = None
-
-    screenshot = pyautogui.screenshot(region=SEARCH_REGION)
-    screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2GRAY)
-    screenshot_edges = cv2.Canny(screenshot, 50, 150)
-
-    for scale in SCALES:
-
-        resized = cv2.resize(
-            template_edges,
-            None,
-            fx=scale,
-            fy=scale,
-            interpolation=cv2.INTER_AREA
-        )
-
-        th, tw = resized.shape
-        sh, sw = screenshot_edges.shape
-
-        if tw > sw or th > sh:
-            continue
-
-        result = cv2.matchTemplate(
-            screenshot_edges,
-            resized,
-            cv2.TM_CCOEFF_NORMED
-        )
-
-        _, score, _, loc = cv2.minMaxLoc(result)
-
-        if score > best_score:
-            best_score = score
-            best_loc = loc
-            best_size = (tw, th)
-
-    return best_score, best_loc, best_size
+listener = Listener(on_press=on_press)
+listener.start()
 
 # ----------------------------
 # MAIN LOOP
@@ -145,48 +76,75 @@ while running:
 
         print("\nChecking for Search.png...")
 
-        found = False
-        best_score = -1
-        best_loc = None
-        best_size = None
+        # ----------------------------
+        # FIND SEARCH BUTTON
+        # ----------------------------
 
-        # retries (NEW)
-        for i in range(MAX_RETRIES):
+        search_shot = pyautogui.screenshot(
+            region=SEARCH_REGION
+        )
 
-            score, loc, size = find_search()
+        search_gray = cv2.cvtColor(
+            np.array(search_shot),
+            cv2.COLOR_RGB2GRAY
+        )
 
-            print(f"Attempt {i+1}/{MAX_RETRIES} score={score:.3f}")
+        result = cv2.matchTemplate(
+            search_gray,
+            template,
+            cv2.TM_CCOEFF_NORMED
+        )
 
-            if score > best_score:
-                best_score = score
-                best_loc = loc
-                best_size = size
+        _, max_val, _, max_loc = cv2.minMaxLoc(result)
 
-            if score >= MATCH_THRESHOLD:
-                found = True
-                break
+        print(f"Search match: {max_val:.3f}")
 
-            time.sleep(0.3)
+        if max_val >= MATCH_THRESHOLD:
 
-        if found:
+            h, w = template.shape
 
-            h, w = best_size
+            click_x = (
+                SEARCH_REGION[0]
+                + max_loc[0]
+                + w // 2
+            )
 
-            click_x = SEARCH_REGION[0] + best_loc[0] + w // 2
-            click_y = SEARCH_REGION[1] + best_loc[1] + h // 2
+            click_y = (
+                SEARCH_REGION[1]
+                + max_loc[1]
+                + h // 2
+            )
 
-            print(f"FOUND Search ({best_score:.3f}) at ({click_x},{click_y})")
+            print(
+                f"Found Search.png at "
+                f"({click_x}, {click_y})"
+            )
 
             # ----------------------------
-            # OLD MOVEMENT (UNCHANGED)
+            # SMOOTH MOVE TO SEARCH
             # ----------------------------
 
-            smooth_move_to(click_x, click_y)
+            start_x, start_y = pyautogui.position()
 
-            # ----------------------------
-            # OLD CLICK LOOP (UNCHANGED)
-            # ----------------------------
+            steps = 50
 
+            for i in range(steps + 1):
+
+                t = i / steps
+
+                x = start_x + (click_x - start_x) * t
+                y = start_y + (click_y - start_y) * t
+
+                pyautogui.moveTo(x, y)
+
+                time.sleep(0.01)
+
+            time.sleep(0.1)
+
+            # Move to exact center
+            pyautogui.moveTo(click_x, click_y)
+
+            # Click center -> left -> center -> left ...
             for i in range(15):
 
                 pyautogui.mouseDown()
@@ -204,17 +162,39 @@ while running:
 
             print("Finished click sequence")
 
-            pyautogui.moveTo(click_x + 300, click_y, duration=0.3)
+            # ----------------------------
+            # MOVE MOUSE AWAY
+            # ----------------------------
+
+            pyautogui.moveTo(
+                click_x + 300,
+                click_y,
+                duration=0.3
+            )
+
+            print("Moved mouse right")
 
         else:
 
-            print("Search NOT found after retries")
+            print("Search button not found")
+
+            timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
+
+            full_file = f"SEARCH_NOT_FOUND_{timestamp}.png"
+            region_file = f"SEARCH_REGION_{timestamp}.png"
+
+            pyautogui.screenshot().save(full_file)
+            pyautogui.screenshot(region=SEARCH_REGION).save(region_file)
+
+            print(f"Saved: {full_file}")
+            print(f"Saved: {region_file}")
+
             print("SEARCH_NOT_FOUND", flush=True)
 
             raise SystemExit(3)
 
         # ----------------------------
-        # JUMP (UNCHANGED)
+        # JUMP
         # ----------------------------
 
         for i in range(10):
