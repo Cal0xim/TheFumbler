@@ -1,0 +1,177 @@
+[2026-06-20T14:20:10.863Z] [LOG] Logger initialized
+[2026-06-20T14:20:10.874Z] [LOG] ◇ injected env (14) from .env [2m// tip: ⌘ custom filepath { path: '/custom/path/.env' }[0m
+[2026-06-20T14:20:10.877Z] [LOG] [PERMISSIONS] file loaded
+[2026-06-20T14:20:12.646Z] [LOG] Running in TEST mode
+[2026-06-20T14:20:12.647Z] [LOG] Logged in as The Fumbler#5097
+[2026-06-20T14:20:12.849Z] [LOG] [SLASH] Registered 2 commands
+[2026-06-20T14:20:14.776Z] [LOG] Rotation set to SUMMER
+[2026-06-20T14:20:14.776Z] [LOG] Next rotation in 17505s
+[2026-06-20T14:20:14.776Z] [LOG] [LEADERBOARD] disabled
+[2026-06-20T14:20:14.789Z] [LOG] ◇ injected env (0) from .env [2m// tip: ◈ secrets for agents [www.dotenvx.com][0m
+[2026-06-20T14:20:14.871Z] [LOG] Playtime system loaded.
+[2026-06-20T14:20:14.873Z] [LOG] Crash system loaded. (10s interval)
+[2026-06-20T14:20:14.874Z] [LOG] All systems loaded.
+[2026-06-20T14:20:35.306Z] [LOG] 
+[DEBUG] Servers found: 4
+[2026-06-20T14:20:35.307Z] [LOG] [NEW] Avoided (augh)
+[2026-06-20T14:20:35.308Z] [LOG] [NEW] Qynn (CREW ONLY)
+[2026-06-20T14:20:35.308Z] [LOG] [NEW] MobilePro (CREW ONLY)
+[2026-06-20T14:20:35.308Z] [LOG] [NEW] Jack (Frostwhale Fumblers Server 2)
+[2026-06-20T14:20:35.309Z] [LOG] [NEW] CommonBlocks (Frostwhale Fumblers Server 2)
+[2026-06-20T14:20:35.553Z] [LOG] 
+------------------------
+5 MINUTES | PLAYERTIME MESSAGE Sat Jun 20 2026 16:20:35 GMT+0200 (Central European Summer Time)
+------------------------
+
+[2026-06-20T14:20:35.554Z] [LOG] [PLAYTIME] MessageDeleted Sat Jun 20 2026 16:20:35 GMT+0200 (Central European Summer Time)
+[2026-06-20T14:20:35.865Z] [LOG] [PLAYTIME] Saved new message 1517896956134031553
+[2026-06-20T14:20:35.866Z] [LOG] [PLAYTIME] Leaderboard posted
+[2026-06-20T14:20:50.594Z] [LOG] 
+[DEBUG] Servers found: 4
+[2026-06-20T14:21:17.517Z] [LOG] Logger initialized
+[2026-06-20T14:21:17.526Z] [LOG] ◇ injected env (14) from .env [2m// tip: ◈ secrets for agents [www.dotenvx.com][0m
+[2026-06-20T14:21:17.528Z] [LOG] [PERMISSIONS] file loaded
+[2026-06-20T14:21:19.417Z] [LOG] Running in TEST mode
+[2026-06-20T14:21:19.419Z] [LOG] Logged in as The Fumbler#5097
+[2026-06-20T14:21:19.628Z] [LOG] [SLASH] Registered 2 commands
+[2026-06-20T14:21:19.927Z] [LOG] Season unchanged — using existing message.
+[2026-06-20T14:21:19.928Z] [LOG] Next rotation in 17440s
+[2026-06-20T14:21:20.074Z] [LOG] [JUMP] Starting jump.py
+[2026-06-20T14:21:20.086Z] [LOG] Leaderboard system loaded.
+[2026-06-20T14:21:20.091Z] [LOG] ◇ injected env (0) from .env [2m// tip: ⌘ multiple files { path: ['.env.local', '.env'] }[0m
+[2026-06-20T14:21:20.159Z] [LOG] Playtime system loaded.
+[2026-06-20T14:21:20.162Z] [LOG] Crash system loaded. (10s interval)
+[2026-06-20T14:21:20.163Z] [LOG] All systems loaded.
+[2026-06-20T14:21:20.658Z] [LOG] [JUMP] Macro started
+[2026-06-20T14:21:20.659Z] [LOG] [JUMP] Press Q to stop
+[2026-06-20T14:21:20.666Z] [LOG] [JUMP] Checking for Search.png...
+[2026-06-20T14:21:20.924Z] [LOG] [JUMP] Attempt 1/5 score=0.702
+[2026-06-20T14:21:21.668Z] [LOG] [JUMP] Attempt 2/5 score=0.702
+[2026-06-20T14:21:22.424Z] [LOG] [JUMP] Attempt 3/5 score=0.702
+[2026-06-20T14:21:23.173Z] [LOG] [JUMP] Attempt 4/5 score=0.702
+[2026-06-20T14:21:23.924Z] [LOG] [JUMP] Attempt 5/5 score=0.702
+[2026-06-20T14:21:24.772Z] [LOG] [JUMP] FAILED (best score=0.702)
+[2026-06-20T14:21:24.773Z] [LOG] [JUMP] Saved: SEARCH_NOT_FOUND_2026-06-20_16-21-24.png
+[2026-06-20T14:21:24.773Z] [LOG] [JUMP] Search failed
+[2026-06-20T14:21:24.773Z] [LOG] [JUMP] Saved: SEARCH_REGION_2026-06-20_16-21-24.png
+[2026-06-20T14:21:24.774Z] [LOG] [JUMP] Consecutive failures: 1
+[2026-06-20T14:21:26.287Z] [LOG] [JUMP] Space pressed at 16:21:26
+[2026-06-20T14:21:40.100Z] [LOG] Updating leaderboard...
+[2026-06-20T14:21:40.735Z] [LOG] 
+[DEBUG] Servers found: 4
+[2026-06-20T14:21:40.873Z] [LOG] 
+------------------------
+5 MINUTES | PLAYERTIME MESSAGE Sat Jun 20 2026 16:21:40 GMT+0200 (Central European Summer Time)
+------------------------
+
+[2026-06-20T14:21:40.873Z] [LOG] [PLAYTIME] MessageDeleted Sat Jun 20 2026 16:21:40 GMT+0200 (Central European Summer Time)
+[2026-06-20T14:21:41.202Z] [LOG] Screenshot saved: assets/crew_leaderboards\ImageLB_2026-06-20_16-21-40.png
+
+RAW OCR:
+
+Non Grass Touchers
+GRIND HQ
+Frostwhale Fumblers
+After Hours
+
+Sand
+
+SOBAT JORAN
+IceDrinking
+Femiboys
+
+ZENIN
+
+PANIC ATTACK
+
+Masterliners
+
+#1 � 871,979
+#2 � 806,170
+#3 � 594,376
+#4 � 515,992
+#5 � 492,525
+#6 � 374,257
+#7 � 331,148
+#8 � 286,094
+#9 � 270,195
+#10 � 260,364
+#11 � 253,389
+
+50/50
+49/50
+49/50
+50/50
+50/50
+50/50
+50/50
+50/50
+49/50
+50/50
+48/50
+
+
+
+Leaderboard found
+
+DEBUG
+Names: 11
+Ratings: 11
+Members: 11
+
+Name | Rating | Members
+-----------------------------------
+Non Grass Touchers | 871,979 | 50/50
+GRIND HQ | 806,170 | 49/50
+Frostwhale Fumblers | 594,376 | 49/50
+After Hours | 515,992 | 50/50
+Sand | 492,525 | 50/50
+SOBAT JORAN | 374,257 | 50/50
+IceDrinking | 331,148 | 50/50
+Femiboys | 286,094 | 50/50
+ZENIN | 270,195 | 49/50
+PANIC ATTACK | 260,364 | 50/50
+Masterliners | 253,389 | 48/50
+-----------------------------------
+Updated OldStats -> NewStats
+
+[2026-06-20T14:21:41.367Z] [LOG] [PLAYTIME] Saved new message 1517897230223409192
+[2026-06-20T14:21:41.368Z] [LOG] [PLAYTIME] Leaderboard posted
+[2026-06-20T14:21:41.672Z] [LOG] [LEADERBOARD] Deleted old message 1516824461263765679
+[2026-06-20T14:22:26.605Z] [LOG] Logger initialized
+[2026-06-20T14:22:26.615Z] [LOG] ◇ injected env (14) from .env [2m// tip: ⌘ enable debugging { debug: true }[0m
+[2026-06-20T14:22:26.617Z] [LOG] [PERMISSIONS] file loaded
+[2026-06-20T14:22:28.057Z] [LOG] Running in TEST mode
+[2026-06-20T14:22:28.058Z] [LOG] Logged in as The Fumbler#5097
+[2026-06-20T14:22:28.282Z] [LOG] [SLASH] Registered 2 commands
+[2026-06-20T14:22:28.598Z] [LOG] Season unchanged — using existing message.
+[2026-06-20T14:22:28.599Z] [LOG] Next rotation in 17371s
+[2026-06-20T14:22:28.700Z] [LOG] [JUMP] Starting jump.py
+[2026-06-20T14:22:28.709Z] [LOG] Leaderboard system loaded.
+[2026-06-20T14:22:28.712Z] [LOG] ◇ injected env (0) from .env [2m// tip: ◈ secrets for agents [www.dotenvx.com][0m
+[2026-06-20T14:22:28.773Z] [LOG] Playtime system loaded.
+[2026-06-20T14:22:28.776Z] [LOG] Crash system loaded. (10s interval)
+[2026-06-20T14:22:28.776Z] [LOG] All systems loaded.
+[2026-06-20T14:22:29.054Z] [LOG] [JUMP] Macro started
+[2026-06-20T14:22:29.054Z] [LOG] [JUMP] Press Q to stop
+[2026-06-20T14:22:29.060Z] [LOG] [JUMP] Checking for Search.png...
+[2026-06-20T14:22:29.310Z] [LOG] [JUMP] Attempt 1/5 score=0.706
+[2026-06-20T14:22:29.311Z] [LOG] [JUMP] Found Search (score=0.706) at (1607, 548)
+[2026-06-20T14:22:30.171Z] [LOG] [JUMP] Click 1
+[2026-06-20T14:22:30.426Z] [LOG] [JUMP] Click 2
+[2026-06-20T14:22:30.677Z] [LOG] [JUMP] Click 3
+[2026-06-20T14:22:30.929Z] [LOG] [JUMP] Click 4
+[2026-06-20T14:22:31.181Z] [LOG] [JUMP] Click 5
+[2026-06-20T14:22:31.433Z] [LOG] [JUMP] Click 6
+[2026-06-20T14:22:31.685Z] [LOG] [JUMP] Click 7
+[2026-06-20T14:22:31.936Z] [LOG] [JUMP] Click 8
+[2026-06-20T14:22:32.188Z] [LOG] [JUMP] Click 9
+[2026-06-20T14:22:32.441Z] [LOG] [JUMP] Click 10
+[2026-06-20T14:22:32.693Z] [LOG] [JUMP] Click 11
+[2026-06-20T14:22:32.945Z] [LOG] [JUMP] Click 12
+[2026-06-20T14:22:33.196Z] [LOG] [JUMP] Click 13
+[2026-06-20T14:22:33.448Z] [LOG] [JUMP] Click 14
+[2026-06-20T14:22:33.700Z] [LOG] [JUMP] Click 15
+[2026-06-20T14:22:33.851Z] [LOG] [JUMP] Finished click sequence
+[2026-06-20T14:22:34.313Z] [LOG] [JUMP] Moved mouse right
+[2026-06-20T14:22:35.828Z] [LOG] [JUMP] Space pressed at 16:22:35
