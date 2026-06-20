@@ -55,15 +55,25 @@ template_edges_original = cv2.Canny(
     150
 )
 
-def smooth_move(x, y, steps=50):
+def smooth_move_to(click_x, click_y):
     start_x, start_y = pyautogui.position()
 
+    steps = 50
+
     for i in range(steps + 1):
+
         t = i / steps
-        nx = start_x + (x - start_x) * t
-        ny = start_y + (y - start_y) * t
-        pyautogui.moveTo(nx, ny)
+
+        x = start_x + (click_x - start_x) * t
+        y = start_y + (click_y - start_y) * t
+
+        pyautogui.moveTo(x, y)
+
         time.sleep(0.01)
+
+    time.sleep(0.1)
+
+    pyautogui.moveTo(click_x, click_y)
 
 # ----------------------------
 # KEYBOARD
@@ -294,11 +304,7 @@ while running:
                 f"at ({click_x}, {click_y})"
             )
 
-            smooth_move(click_x, click_y, steps=150)
-
-            time.sleep(0.1)
-
-            pyautogui.moveTo(click_x, click_y)
+            smooth_move_to(click_x, click_y)
 
             time.sleep(0.1)
 
